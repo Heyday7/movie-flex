@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
 export const defaultBoxStyle = css`
   border: 1px solid var(--adaptiveGray300);

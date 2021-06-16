@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function InitialQuiz() {
-  return <div>initialQuiz</div>;
+  return <div>initial</div>;
 }
 
 export default InitialQuiz;

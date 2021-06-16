@@ -2,24 +2,24 @@
 const calcRem = (px) => `${px / 16}rem`;
 
 const lightColor = {
-  red: "#dc3545",
-  lightred: "#FFF7F9",
-  orange: "#fd7e14",
-  yellow: "#ffc107",
-  green: "#28a745",
-  teal: "#20c997",
-  blue: "#007bff",
-  lightblue: "#bfe0fe",
-  indigo: "#6610f2",
-  purple: "#6f42c1",
-  pink: "#e83e8c",
-  cyan: "#17a2b8",
-  primary: "#007bff",
-  secondary: "#6c757d",
-  success: "#28a745",
-  info: "#17a2b8",
-  warning: "#ffc107",
-  danger: "#dc3545",
+  red: '#dc3545',
+  lightred: '#FFF7F9',
+  orange: '#fd7e14',
+  yellow: '#ffc107',
+  green: '#28a745',
+  teal: '#20c997',
+  blue: '#007bff',
+  lightblue: '#bfe0fe',
+  indigo: '#6610f2',
+  purple: '#6f42c1',
+  pink: '#e83e8c',
+  cyan: '#17a2b8',
+  primary: '#007bff',
+  secondary: '#6c757d',
+  success: '#28a745',
+  info: '#17a2b8',
+  warning: '#ffc107',
+  danger: '#dc3545',
 };
 
 const darkColor = {
@@ -66,8 +66,8 @@ const margins = {
 };
 
 const deviceSizes = {
-  tablet: `@media all and (min-width: 767px) and (max-width: 1023px)`,
-  desktop: `@media all and (min-width: 1023px)`,
+  tablet: '@media all and (min-width: 767px) and (max-width: 1023px)',
+  desktop: '@media all and (min-width: 1023px)',
 };
 
 const theme = {
