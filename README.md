@@ -4,7 +4,12 @@
 
 ## how to init this project?
 
-1. 해당 프로젝트를 zip이나 git clone합니다.
+1. 해당 프로젝트를 fork한 다음 git clone합니다
+   fork가 뭐냐? 여러분들이 접속한 github의 상단부분에 보면, watch, star, fork란게 있을 겁니다.
+   일단 **star**를 한 번 누르신 다음 **fork**를 누르면, 여러분들의 github 계정 내 repository에 똑같은 프로젝트가 생성됩니다.
+
+   그런 다음 `git clone [프로젝트의 주소]`를 터미널에 입력하여 해당 프로젝트를 내려 받습니다.
+   여러분의 로컬(여러분들 컴퓨터)에 해당 프로젝트 소스코드가 다운로드 될 것입니다.
 
 2. 의존성을 설치합니다.
 
