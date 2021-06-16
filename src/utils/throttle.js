@@ -1,4 +1,4 @@
-export function throttle(callback, ms = 1000) {
+function throttle(callback, ms = 1000) {
   let timer = null;
   return function (...args) {
     if (timer === null) {
@@ -9,3 +9,5 @@ export function throttle(callback, ms = 1000) {
     }
   };
 }
+
+export default throttle;

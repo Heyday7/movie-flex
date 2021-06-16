@@ -31,5 +31,8 @@ module.exports = {
     'react/prop-types': 0,
     'react/button-has-type': 0,
     'comma-dangle': 0,
+    'func-names': 0,
+    'prefer-spread': 0,
+    'consistent-return': 0,
   },
 };

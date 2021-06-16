@@ -1,4 +1,4 @@
-export function debounce(callback, ms = 1000) {
+function debounce(callback, ms = 1000) {
   let timeoutId = null;
   return (...args) => {
     clearTimeout(timeoutId);
@@ -7,3 +7,5 @@ export function debounce(callback, ms = 1000) {
     }, ms);
   };
 }
+
+export default debounce;
