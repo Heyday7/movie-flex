@@ -65,7 +65,9 @@ const S = {
   `,
 };
 
-function Modal({ showModal, setshowModal, title = 'title', contents = 'contents' }) {
+function Modal({
+  showModal, setshowModal, title = 'title', contents = 'contents'
+}) {
   const confirmClick = () => setshowModal(false);
 
   return (
