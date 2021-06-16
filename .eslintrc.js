@@ -11,20 +11,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['prettier', 'react'],
+  plugins: ['react'],
   rules: {
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        semi: true,
-        useTabs: false,
-        tabWidth: 2,
-        printWidth: 80,
-        bracketSpacing: true,
-        arrowParens: 'always',
-      },
-    ],
     'eslintreact/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': 0,
@@ -34,5 +22,8 @@ module.exports = {
     'func-names': 0,
     'prefer-spread': 0,
     'consistent-return': 0,
+    'implicit-arrow-linebreak': 0,
+    'function-paren-newline': 0,
+    'no-console': 0,
   },
 };

@@ -1,10 +1,31 @@
-import InitialQuiz from './components/quiz/InitialQuiz';
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NotFoundError from './components/pages/404';
+import Home from './components/pages/home';
+
+const ActorQuiz = React.lazy(() => import('./components/quiz/actorQuiz'));
+const DirectorQuiz = React.lazy(() => import('./components/quiz/directorQuiz'));
+const InitialQuiz = React.lazy(() => import('./components/quiz/InitialQuiz'));
+const MovieNameRelayQuiz = React.lazy(() => import('./components/quiz/movieNameRelayQuiz'));
+const MovieScoreQuiz = React.lazy(() => import('./components/quiz/movieScoreQuiz'));
+const MovieYearQuiz = React.lazy(() => import('./components/quiz/movieYearQuiz'));
 
 function App() {
   return (
-    <div>
-      <InitialQuiz />
-    </div>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/actor-quiz" component={ActorQuiz} />
+          <Route exact path="/director-quiz" component={DirectorQuiz} />
+          <Route exact path="/initial-quiz" component={InitialQuiz} />
+          <Route exact path="/movie-name-relay-quiz" component={MovieNameRelayQuiz} />
+          <Route exact path="/movie-score-quiz" component={MovieScoreQuiz} />
+          <Route exact path="/movie-year-quiz" component={MovieYearQuiz} />
+          <Route render={() => <NotFoundError />} />
+        </Switch>
+      </Suspense>
+    </Router>
   );
 }
 
