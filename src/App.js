@@ -1,4 +1,4 @@
-import InitialQuiz from './components/quiz/InitialQuiz';
+import InitialQuiz from "./components/quiz/InitialQuiz";
 
 function App() {
   return (

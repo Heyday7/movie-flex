@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import zoomIn from '../../animations/zoomIn';
+import React from "react";
+import styled from "styled-components";
+import zoomIn from "../../animations/zoomIn";
 
 const S = {
   Wrapper: styled.div`
@@ -68,8 +68,8 @@ const S = {
 function Modal({
   showModal,
   setshowModal,
-  title = 'title',
-  contents = 'contents',
+  title = "title",
+  contents = "contents",
 }) {
   const confirmClick = () => setshowModal(false);
 
