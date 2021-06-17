@@ -29,6 +29,8 @@ npm start
 yarn start
 ```
 
+4. 에디터에서 auto formatting을 꺼줍시다.  
+
 위 명령어를 터미널 창에 입력하고 잠시 기다리면 자동으로 http://localhost:3000 주소에 리액트 프로젝트가 실행됩니다.
 
 ## 그래서 저는 무슨 일을 해야하나요?
@@ -75,4 +77,4 @@ https://create-react-app.dev/docs/adding-custom-environment-variables/
 
 ## 활용한 api
 
-https://developers.naver.com/docs/search/movie/
+https://developers.themoviedb.org/3/movies
