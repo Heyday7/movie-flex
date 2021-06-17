@@ -72,12 +72,12 @@ prop-type? 우린 그런거 없이 갑니다.
 
 https://developers.themoviedb.org/3/movies
 
-now_playing => https://developers.themoviedb.org/3/movies/get-now-playing
-upcoming => https://developers.themoviedb.org/3/movies/get-upcoming
-popular => https://developers.themoviedb.org/3/movies/get-popular-movies
-${id}/videos => https://developers.themoviedb.org/3/movies/get-movie-videos
-${id} => https://developers.themoviedb.org/3/movies/get-movie-details
-search/movie => https://developers.themoviedb.org/3/search/search-movies
+now_playing => https://developers.themoviedb.org/3/movies/get-now-playing  
+upcoming => https://developers.themoviedb.org/3/movies/get-upcoming  
+popular => https://developers.themoviedb.org/3/movies/get-popular-movies  
+${id}/videos => https://developers.themoviedb.org/3/movies/get-movie-videos  
+${id} => https://developers.themoviedb.org/3/movies/get-movie-details  
+search/movie => https://developers.themoviedb.org/3/search/search-movies  
 
 ## 애로 사항
 
