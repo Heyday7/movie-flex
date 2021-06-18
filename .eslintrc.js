@@ -25,12 +25,9 @@ module.exports = {
     'implicit-arrow-linebreak': 0,
     'function-paren-newline': 0,
     'no-console': 0,
-<<<<<<< HEAD
     'linebreak-style': ['error', 'windows'],
-=======
     'no-shadow': 0,
     'no-unused-vars': 0,
     'import/prefer-default-export': 0,
->>>>>>> upstream/master
   },
 };

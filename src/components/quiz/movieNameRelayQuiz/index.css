@@ -103,11 +103,9 @@ nav {
 
 .quiz-content {
     position: absolute;
-    width: 89px;
     height: 65px;
     left: 546px;
-    top: 348px;
-
+    
     font-family: Noto Sans;
     font-style: normal;
     font-weight: 800;
