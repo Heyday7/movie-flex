@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/movie-name-relay-quiz" component={MovieNameRelayQuiz} />
           <Route exact path="/movie-score-quiz" component={MovieScoreQuiz} />
           <Route exact path="/movie-year-quiz" component={MovieYearQuiz} />
-          <Route render={() => <NotFoundError />} />
+          <Route component={() => <NotFoundError />} />
         </Switch>
       </Suspense>
     </Router>

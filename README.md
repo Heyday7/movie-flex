@@ -2,7 +2,6 @@
 
 벤처경영학과 웹 프로그래밍 기말 과제입니다.
 
-**아직 하지마십쇼. 기다려! 멈춰!(~2021/6/18)**
 
 ## how to init this project?
 
@@ -28,6 +27,8 @@ npm start
 // or
 yarn start
 ```
+
+4. 에디터에서 auto formatting을 꺼줍시다.  
 
 위 명령어를 터미널 창에 입력하고 잠시 기다리면 자동으로 http://localhost:3000 주소에 리액트 프로젝트가 실행됩니다.
 
@@ -67,12 +68,18 @@ yarn start
 prop-type? 우린 그런거 없이 갑니다. 
 
 
+## API 명세서
+
+https://developers.themoviedb.org/3/movies
+
+now_playing => https://developers.themoviedb.org/3/movies/get-now-playing  
+upcoming => https://developers.themoviedb.org/3/movies/get-upcoming  
+popular => https://developers.themoviedb.org/3/movies/get-popular-movies  
+${id}/videos => https://developers.themoviedb.org/3/movies/get-movie-videos  
+${id} => https://developers.themoviedb.org/3/movies/get-movie-details  
+search/movie => https://developers.themoviedb.org/3/search/search-movies  
+
 ## 애로 사항
 
 환경 변수를 클라이언트에 저장하지 말라고 알려주고 있음. 근데 이 프로젝트에선 백엔드라는게 딱히 없어서 환경 변수 은닉이 불가능했음. 어쩔 수 없이 그냥 사용.
 https://create-react-app.dev/docs/adding-custom-environment-variables/
-
-
-## 활용한 api
-
-https://developers.naver.com/docs/search/movie/

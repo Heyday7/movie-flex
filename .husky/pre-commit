@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "😋😋😋 formatting before commit... 😋😋😋"
+echo "😋😈😋😈😋 벤창 2조 아자아자~ formatting before commit... 😋😈😋😈😋"
 npm run format
