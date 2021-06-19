@@ -13,13 +13,25 @@ function DirectorQuiz() {
   return (
     <div>
       <header>
-        <div className="navbar">
-          <div className="logo">
-            <img className="logo" src="./logo.png" alt="logo" />
-          </div>
+        <div className="nav_bar">
+          <span className="logo">
+            <img src="./logo.png" alt="logo" />
+          </span>
+          <span className="movieQuiz">영화퀴즈</span>
+        </div>
+        <div className="division_bar_1">
+          <div className="division_bar_2"> divbar </div>
         </div>
       </header>
-      Director
+      <body>
+        <div className="quiz4">4. 감독으로 영화 맞추기</div>
+        <div className="question4">다음 영화감독이 만든 작품을 모두 골라보세요</div>
+        <div className="director_box">감독이름</div>
+        <div className="answer_box">영화이름</div>
+        <div>
+          <button className="next_button">다음 퀴즈</button>
+        </div>
+      </body>
     </div>
   );
 }
