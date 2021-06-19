@@ -5,7 +5,7 @@ import './directorQuiz.css';
 function DirectorQuiz() {
   useEffect(() => {
     const getData = async () => {
-      const { data } = await movieApi.popular();
+      const { data } = await movieApi.boxOfficeData(20210612);
       console.log(data);
     };
     getData();
