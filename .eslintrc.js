@@ -28,5 +28,6 @@ module.exports = {
     'no-shadow': 0,
     'no-unused-vars': 0,
     'import/prefer-default-export': 0,
+    'linebreak-style': ['error', 'windows'],
   },
 };
