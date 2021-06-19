@@ -12,5 +12,6 @@ describe('Header', () => {
         <App />
       </MemoryRouter>
     );
+    screen.debug();
   });
 });
