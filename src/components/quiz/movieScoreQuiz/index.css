@@ -92,13 +92,21 @@ nav {
   color: #000000;
 }
 
-.left-movie {
-  position: absolute;
+.movie-box {
   width: 350px;
   height: 400px;
+  border-radius: 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+.movie-box:hover {
+  transform: scale(1.2);
+}
+
+.left-movie {
+  position: absolute;
   left: 22.8%;
   top: 36.2%;
-
   background: #c4c4c4;
 }
 
@@ -121,10 +129,28 @@ nav {
 
 .right-movie {
   position: absolute;
-  width: 350px;
-  height: 400px;
   left: 58.1%;
   top: 36.2%;
-
   background: #c4c4c4;
+}
+
+.current-score {
+  position: absolute;
+  top: 20%;
+  left: 85%;
+  font-size: 30px;
+}
+
+.fail-on {
+    position: absolute;
+    text-align: center;
+    padding: 200px;
+    width: 50vw;
+    height: 50vh;
+    margin: 0 auto;
+    background-color:#828282;
+}
+
+.correct-on {
+    
 }

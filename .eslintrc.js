@@ -32,5 +32,9 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'no-unused-expressions': 0,
+    'import/no-unresolved': 0,
+    'no-undef': 0,
+    'max-len': 0,
+    'react/jsx-one-expression-per-line': 0,
   },
 };
