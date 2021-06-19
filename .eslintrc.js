@@ -29,5 +29,8 @@ module.exports = {
     'no-shadow': 0,
     'no-unused-vars': 0,
     'import/prefer-default-export': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'no-unused-expressions': 0,
   },
 };

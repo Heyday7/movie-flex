@@ -1,7 +1,7 @@
 nav {
     position: absolute;
     width: 100%;
-    height: 76px;
+    height: 7.4%;
     left: 0px;
     top: 0px;
     background: #000000;
@@ -11,17 +11,17 @@ nav {
     position: absolute;
     width: 32px;
     height: 32px;
-    left: 46px;
-    top: 22px;
+    left: 3.2%;
+    top: 28.9%;
     background: url(film.png);
 }
 
 .nav-quiz {
     position: absolute;
-    width: 65px;
-    height: 16px;
-    left: 139px;
-    top: 30px;
+    width: 21.1%;
+    height: 4%;
+    left: 9.7%;
+    top: 39.5%;
 
     font-family: BBTreeGo_R;
     font-style: normal;
@@ -34,10 +34,10 @@ nav {
 
 .nav-rank {
     position: absolute;
-    width: 35px;
-    height: 16px;
-    left: 244px;
-    top: 30px;
+    width: 21.1%;
+    height: 2%;
+    left: 16.9%;
+    top: 39.5%;
 
     font-family: BBTreeGo_R;
     font-style: normal;
@@ -50,10 +50,10 @@ nav {
 
 .status-bar {
     position: absolute;
-    width: 1193px;
-    height: 12px;
-    left: 123px;
-    top: 123px;
+    width: 82.8%;
+    height: 1.2%;
+    left: 8.5%;
+    top: 12%;
 
     background: #DADADA;
     border-radius: 10px;
@@ -61,10 +61,10 @@ nav {
 
 .question-title {
     position: absolute;
-    width: 250px;
-    height: 24px;
-    left: 182px;
-    top: 195px;
+    width: 13%;
+    height: 2.3%;
+    left: 12.6%;
+    top: 19%;
 
     font-family: BBTreeGo_R;
     font-style: normal;
@@ -77,11 +77,11 @@ nav {
 
 .question-content {
     position: absolute;
-    width: 500px;
-    height: 24px;
-    left: 225px;
-    top: 251px;
-    
+    width: 42.2%;
+    height: 2.3%;
+    left: 15.6%;
+    top: 24.5%;
+
     font-family: BBTreeGo_R;
     font-style: normal;
     font-weight: normal;
@@ -92,20 +92,21 @@ nav {
 }
 
 .question-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    width: 1194px;
-    height: 131px;
-    left: 123px;
-    top: 315px;
+    width: 82.9%;
+    height: 12.8%;
+    left: 8.5%;
+    top: 30.8%;
 
     background: #FFF6D8;
 }
 
-.quiz-content {
-    position: absolute;
-    height: 65px;
-    left: 546px;
-    
+.quiz-content-hint {
+    margin-right: 30px;
     font-family: Noto Sans;
     font-style: normal;
     font-weight: 800;
@@ -116,12 +117,24 @@ nav {
     color: #000000;
 }
 
+.quiz-content-quiz {
+    flex-grow: 0;
+    background-color: #fed130;
+
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 65px;
+    text-align: center;
+}
+
 .answer-box-title {
     position: absolute;
     width: 28px;
     height: 24px;
-    left: 475px;
-    top: 528px;
+    left: 33%;
+    top: 51.6%;
 
     font-family: BBTreeGo_R;
     font-style: normal;
@@ -134,11 +147,15 @@ nav {
 }
 
 .answer-box-content {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
     position: absolute;
     width: 378px;
     height: 60px;
-    left: 531px;
-    top: 510px;
+    left: 36.9%;
+    top: 49.8%;
     background: #FFFFFF;
     border: 1px solid #000000;
     box-sizing: border-box;

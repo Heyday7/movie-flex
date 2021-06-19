@@ -25,7 +25,8 @@ function MovieNameRelayQuiz() {
       <div className="question-title">3. 영화 이어말하기</div>
       <div className="question-content">이어지는 영화 제목을 맞춰보세요.</div>
       <div className="question-box">
-        <div className="quiz-content">{ movieTitle }</div>
+        <div className="quiz-content-hint">{ movieTitle }</div>
+        <div className="quiz-content-quiz">???</div>
       </div>
       <div className="answer-box">
         <div className="answer-box-title">답:</div>
