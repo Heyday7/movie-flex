@@ -10,6 +10,7 @@ function MovieScoreQuiz() {
   const [leftScore, setLeftScore] = useState(0);
   const [rightScore, setRightScore] = useState(0);
   const [score, setScore] = useState(0);
+
   const popFailModal = () => {
     const failModalDom = document.getElementById('fail-modal');
     failModalDom.classList.add('fail-on');
@@ -17,11 +18,15 @@ function MovieScoreQuiz() {
   const popCorrectModal = () => {
     const correctModal = document.getElementById('correct-modal');
     correctModal.classList.add('correct-on');
+    setTimeout(() => {
+      correctModal.classList.remove('correct-on');
+    }, 1000);
   };
   const choiceLeft = () => {
     console.log('Left');
     if (leftScore >= rightScore) {
       console.log('맞췄습니다!');
+      popCorrectModal();
       setScore(score + 1);
     } else {
       console.log('틀렸습니다!');
@@ -31,6 +36,7 @@ function MovieScoreQuiz() {
   const choiceRight = () => {
     if (leftScore <= rightScore) {
       console.log('맞췄습니다!');
+      popCorrectModal();
       setScore(score + 1);
     } else {
       console.log('틀렸습니다!');
@@ -79,8 +85,15 @@ function MovieScoreQuiz() {
         <img onClick={choiceRight} src={rightMovie} alt="" className="right-movie movie-box" />
       </div>
       <div className="current-score">현재 점수 : { score } 점</div>
-      <div id="fail-modal">틀렸습니다!</div>
-      <div id="correct-modal">맞았습니다!</div>
+      <div id="fail-modal">
+        <div className="fail-modal-inner">틀렸습니다!</div>
+        <div>나의 점수는 {score} 점!</div>
+        {/* 누르면 메인페이지로 돌아가도록 하기 */}
+        <button className="fail-modal-close">메인페이지로 돌아가기</button>
+      </div>
+      <div id="correct-modal">
+        <div className="correct-modal-inner">정답입니다!</div>
+      </div>
     </div>
   );
 }
