@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
         --lightred: ${(props) => props.theme.lightColor.lightred};
         --orange: ${(props) => props.theme.lightColor.orange};
         --yellow: ${(props) => props.theme.lightColor.yellow};
+        --lightyellow: ${(props) => props.theme.lightColor.lightyellow};
         --green: ${(props) => props.theme.lightColor.green};
         --teal: ${(props) => props.theme.lightColor.teal};
         --blue: ${(props) => props.theme.lightColor.blue};
@@ -38,6 +39,7 @@ const GlobalStyle = createGlobalStyle`
         --red: ${(props) => props.theme.darkColor.red};
         --orange: ${(props) => props.theme.darkColor.orange};
         --yellow: ${(props) => props.theme.darkColor.yellow};
+        --lightyellow: ${(props) => props.theme.lightColor.lightyellow};
         --green: ${(props) => props.theme.darkColor.green};
         --teal: ${(props) => props.theme.darkColor.teal};
         --blue: ${(props) => props.theme.darkColor.blue};
@@ -69,6 +71,9 @@ const GlobalStyle = createGlobalStyle`
     }
     * {
         box-sizing: border-box;
+    }
+    input {
+        outline: none;
     }
 `;
 

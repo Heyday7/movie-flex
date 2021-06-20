@@ -5,7 +5,7 @@ import {
 function extractKoPhonemes(char) {
   // 한글이 아니면 false
   if (!char.match(/[ㄱ-ㅎ가-힣]/)) {
-    return false;
+    return char;
   }
 
   let initial = '';

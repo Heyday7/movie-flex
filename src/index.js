@@ -5,6 +5,7 @@ import App from './App';
 import theme from './style/theme';
 import GlobalStyle from './style/globalStyle';
 import './style/reset.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
