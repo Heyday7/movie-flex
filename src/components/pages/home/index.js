@@ -24,16 +24,16 @@ const S = {
 
     &:hover {
       transform: translateY(-5%);
-      transition: transform .5s ease;
+      transition: transform 0.5s ease;
     }
-  `
+  `,
 };
 function Home({ history }) {
   console.log(history);
   return (
     <S.GameWrapper>
-      <S.Game>
-        <div onClick={() => history.push('/actor-quiz')}>영화 배우 퀴즈</div>
+      <S.Game onClick={() => history.push('/actor-quiz')}>
+        영화 배우 퀴즈
       </S.Game>
       <S.Game onClick={() => history.push('/director-quiz')}>
         영화 감독 퀴즈
