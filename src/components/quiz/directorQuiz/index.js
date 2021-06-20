@@ -8,17 +8,11 @@ function DirectorQuiz() {
   const [director, setDirector] = useState(null);
   const [answerNum, setAnswerNum] = useState(null);
   const [answer, setAnswer] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedMovie, setSelectedMovie] = useState([]);
   const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
   let movieLists = [];
-  // const onChangeAnswerBox = (e, movie) => {
-  //   e.preventDefault();
-  //   if (id === select__movieTitle) {
-  //     setTitleBg("");
-  //   } else {
-  //     setTitleBg(id);
-  //   }
-  // };
+  let tmpMovie = null;
   const getFormatDate = (date) => {
     const year = date.getFullYear();
     let month = (1 + date.getMonth());
@@ -40,6 +34,18 @@ function DirectorQuiz() {
     }
     return array;
   };
+  const setMovieData = (movieNames) => {
+    setMovies(movieNames);
+  };
+  // const setQuizData = (movieNameList) => {
+  //   console.log(movieNameList);
+  //   setAnswerNum(movieNameList.length);
+  //   const ansMovies = [
+  //     ...movieNameList,
+  //     ...movieLists
+  //   ];
+  //   setMovieData(shuffleArray(ansMovies));
+  // };
   useEffect(() => {
     const getData = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -62,15 +68,19 @@ function DirectorQuiz() {
       });
   }, []);
   useEffect(() => {
-    const getData = async () => {
+    const getData1 = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
       // eslint-disable-next-line no-return-await
       return await movieApi.boxOfficeData(randDate);
     };
-    getData()
+    setIsLoading(true);
+    getData1()
       .then((res) => {
         console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
         return res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
+      })
+      .then((tmp) => {
+        tmpMovie = tmp;
       })
       .then((tmpMovie) => {
         console.log(tmpMovie);
@@ -88,7 +98,7 @@ function DirectorQuiz() {
             setDirector(dir);
             const getDirMovies = async (dir) => {
               const { data } = await movieApi.movieListByDirector(dir);
-              console.log('data!');
+              console.log('movielistbydirector');
               console.log(data);
               return data.movieListResult.movieList;
             };
@@ -99,28 +109,38 @@ function DirectorQuiz() {
                 dirMovieList.map((dirMovie) => {
                   dirMovieNameList.push(dirMovie.movieNm);
                 });
+                if (dirMovieNameList.length >= 4) {
+                  dirMovieNameList.splice(3, dirMovieNameList.length - 3);
+                }
                 console.log(dirMovieNameList);
                 setDirMovies(dirMovieNameList);
-                while (dirMovieNameList.length > 3) {
-                  dirMovieNameList.pop();
-                }
                 setAnswerNum(dirMovieNameList.length);
-                let ansMovies = [
+                const ansMovies = [
                   ...dirMovieNameList,
                   ...movieLists
                 ];
-                ansMovies = shuffleArray(ansMovies);
-                setMovies(ansMovies);
-                console.log(ansMovies);
+                setMovies(shuffleArray(ansMovies));
               })
-              .then((res) => {
+              .then(() => {
+                if (dirMovies && movies && answerNum) {
+                  setIsLoading(false);
+                }
+                console.log(isLoading);
+                console.log(dirMovies);
                 console.log(movies);
-                console.log(answerNum);
               });
-            return dir;
           });
       });
   }, []);
+  const onChangeAnswerBox = (movie) => {
+    if (selectedMovie.includes(movie)) {
+      setSelectedMovie(selectedMovie.filter((selmovie) => selmovie !== movie));
+    } else {
+      setSelectedMovie([...selectedMovie, movie]);
+    }
+    console.log('selected!');
+    console.log(selectedMovie);
+  };
   console.log(randomDate(new Date(2010, 0, 1), new Date()));
   return (
     <div>
@@ -141,28 +161,28 @@ function DirectorQuiz() {
         <div className="director_box">
           {director}
         </div>
-        { dirMovies && (
+        { !isLoading && (
           <div>
             <div>
               대표작:
-              {dirMovies[0].movieNm}
+              {dirMovies[0]}
             </div>
-            <div className="answer_sheet">
-              {movies.map((movie) => (
-                <button
+            <ul className="answer_sheet">
+              { movies.map((movie) => (
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events
+                <li
                   className={
-                  movie in selectedMovie
+                  selectedMovie.find((selMovie) => selMovie === movie)
                     ? 'selectedAnswerBox'
                     : 'defaultAnswerBox'
                 }
-                  id={movie}
-                  onClick={onChangeAnswerBox(e, movie)}
+                  onClick={() => onChangeAnswerBox(movie)}
                 >
                   {movie}
-                </button>
+                </li>
               )
               )}
-            </div>
+            </ul>
           </div>
         )}
         <div>
