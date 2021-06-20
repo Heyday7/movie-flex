@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './index.css';
 import film from './film.png';
 import { movieApi } from '../../../api/movieApi';
-import Modal from '../../common/Modal';
+import HoonsModal from '../../common/HoonsModal';
 
 function MovieNameRelayQuiz() {
   const [movieTitle, setTitle] = useState(null);
@@ -12,18 +12,20 @@ function MovieNameRelayQuiz() {
   const [answerLength, setLength] = useState(0);
   const [score, setScore] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-
-  // modal state
   const [showModal, setShowModal] = useState(false);
+  const [isCorrect, setCorrect] = useState(false);
 
   const makeRandomNumber = (n) => (Math.floor(Math.random(0) * (n - 1) + 1));
 
   const popFailModal = () => {
+    setCorrect(false);
     setShowModal(true);
   };
 
   const popCorrectModal = () => {
+    setCorrect(true);
     setShowModal(true);
+    setTimeout(() => { setShowModal(false); }, 700);
   };
 
   const setAnswerLength = (answer) => {
@@ -70,7 +72,9 @@ function MovieNameRelayQuiz() {
 
   return (
     <>
-      <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => console.log('confirm을 누르면 발동하는 함수입니다')} title="title" contents="contents" />
+      <>
+        {isCorrect ? <HoonsModal isCorrect={isCorrect} showModal={showModal} setshowModal={setShowModal} title="정답입니다!" /> : <HoonsModal showModal={showModal} setshowModal={setShowModal} title="오답입니다!" />}
+      </>
       <div>
         <nav>
           <img src={film} alt="" className="nav-image" />
@@ -94,23 +98,9 @@ function MovieNameRelayQuiz() {
           <div> 정답 제출 </div>
         </div>
         <div className="current-score">현재 점수 : { score } 점</div>
-        <div className="fail-modal">
-          <div className="fail-modal-inner">틀렸습니다!</div>
-          <div>나의 점수는 {score} 점!</div>
-          <Link className="link-to-home" to="/">메인페이지로 돌아가기</Link>
-        </div>
-        <div className="correct-modal">
-          <div className="correct-modal-inner">정답입니다!</div>
-        </div>
       </div>
     </>
   );
 }
 
 export default MovieNameRelayQuiz;
-// .then(() => setHint(movieTitle.substring(0, movieTitle.length / 2))
-//       )
-//       .then(() => setAnswer(movieTitle.substring(movieTitle.length / 2)))
-//       .then(() => setLength('? '.repeat(titleAnswer.length)));
-//     console.log(movieTitle);
-//     console.log(titleAnswer);
