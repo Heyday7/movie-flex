@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
-import './logo.png';
+import logo from './logo.png';
 
 function DirectorQuiz() {
   const [movies, setMovies] = useState(null);
@@ -130,8 +130,8 @@ function DirectorQuiz() {
     <div>
       <header>
         <div className="nav_bar">
-          <span className="logo">
-            <img src="./logo.png" alt="logo" />
+          <span>
+            <img src={logo} alt="logo" className="logo" />
           </span>
           <span className="movieQuiz">영화퀴즈</span>
         </div>
@@ -146,15 +146,15 @@ function DirectorQuiz() {
           {director}
         </div>
         { dirMovies && movies && answerNum && (
-          <div>
-            <div>
+          <div className="hint">
+            <span className="represent">
               대표작:
               {dirMovies[0]}
-            </div>
-            <div>
+            </span>
+            <span>
               맞은 개수:
               {score}
-            </div>
+            </span>
             <ul className="answer_sheet">
               { movies.map((movie) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events

@@ -9,6 +9,10 @@ const Params1 = {
   itemPerPage: 20
 };
 
+const Params2 = {
+  key: API_KEY_1
+};
+
 const Params1Box = {
   key: API_KEY_1,
   itemPerPage: 20,
@@ -55,4 +59,5 @@ export const movieApi = {
   movieListByDirector: (directorNm) => api1.get('movie/searchMovieList.json', { params: { ...Params1, directorNm } }),
   movieList: (curPage) => api1.get('movie/searchMovieList.json', { params: { ...Params1, curPage } }),
   boxOfficeData: (targetDt) => api1.get('boxoffice/searchDailyBoxOfficeList.json', { params: { ...Params1Box, targetDt } }),
+  movieDetailByCd: (movieCd) => api1.get('movie/searchMovieInfo.json', { params: { ...Params2, movieCd } }),
 };
