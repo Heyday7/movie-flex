@@ -118,13 +118,31 @@
     text-align: center;
     color: #000000;
 }
-.answer_box {
+.defaultAnswerBox {
     width: 33.3%;
     height: 4.6%;
     margin: 1% 3.3% 1% 33.3%;
     padding: 1.35% 25% 1.35% 2%;
     border: solid 1px #000000;
     background-color: #ffffff;
+    font-family: BBTreeGo_R;
+    white-space : nowrap;
+    font-size: 24px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+.selectedAnswerBox {
+    width: 33.3%;
+    height: 4.6%;
+    margin: 1% 3.3% 1% 33.3%;
+    padding: 1.35% 25% 1.35% 2%;
+    border: solid 1px #000000;
+    background-color: #fed130;
     font-family: BBTreeGo_R;
     white-space : nowrap;
     font-size: 24px;
