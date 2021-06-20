@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 import film from './film.png';
-import loading from './loading.gif';
 import { movieApi } from '../../../api/movieApi';
 
 function MovieScoreQuiz() {
@@ -85,7 +85,7 @@ function MovieScoreQuiz() {
         <div className="fail-modal-inner">틀렸습니다!</div>
         <div>나의 점수는 {score} 점!</div>
         {/* 누르면 메인페이지로 돌아가도록 하기 */}
-        <button className="fail-modal-close">메인페이지로 돌아가기</button>
+        <Link className="link-to-home" to="/">메인페이지로 돌아가기</Link>
       </div>
       <div className="correct-modal">
         <div className="correct-modal-inner">정답입니다!</div>
