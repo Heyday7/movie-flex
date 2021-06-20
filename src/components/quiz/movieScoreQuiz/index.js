@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 import film from './film.png';
 import { movieApi } from '../../../api/movieApi';
@@ -26,7 +25,6 @@ function MovieScoreQuiz() {
   };
 
   const choiceLeft = () => {
-    console.log('Left');
     if (leftScore >= rightScore) {
       popCorrectModal();
       setScore(score + 1);
@@ -51,7 +49,6 @@ function MovieScoreQuiz() {
   useEffect(() => {
     const getData = async () => {
       const { data } = await movieApi.popular(makeRandomNumber(7));
-      console.log(data);
       const leftNumber = makeRandomNumber(20);
       let rightNumber = 0;
       while (1) {

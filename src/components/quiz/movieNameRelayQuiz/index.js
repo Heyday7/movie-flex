@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 import film from './film.png';
 import { movieApi } from '../../../api/movieApi';
@@ -33,7 +32,6 @@ function MovieNameRelayQuiz() {
   };
 
   const setQuizData = (title) => {
-    console.log(title);
     setHint(title.substring(0, title.length / 2));
     setAnswer(title.substring(title.length / 2).replace(/ /gi, ''));
     setAnswerLength(title.substring(title.length / 2).replace(/ /gi, '').length);
@@ -48,9 +46,7 @@ function MovieNameRelayQuiz() {
 
   const checkAnswer = (e) => {
     const answer = titleAnswer.toUpperCase().replace(/ /gi, '');
-    console.log(answer);
     const userAnswerModify = userAnswer.toUpperCase().replace(/ /gi, '');
-    console.log(userAnswerModify);
     if (userAnswerModify === answer) {
       popCorrectModal();
       setScore(score + 1);
