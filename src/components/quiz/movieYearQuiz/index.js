@@ -12,10 +12,11 @@ function MovieYearQuiz() {
   const [fourthMovie, setFourthMovie] = useState(null);
   const [fifthMovie, setFifthMovie] = useState(null);
 
-  const randomNum = Math.floor(Math.random() * 24);
+  /* 1부터 24까지의 랜덤한 자연수 */
   const randomNumbers = [];
 
-  for (let i = 0; i < 4; i += 1) {
+  for (let i = 0; i < 5; i += 1) {
+    const randomNum = Math.floor(Math.random() * 24);
     if (randomNumbers.indexOf(randomNum) === -1) {
       randomNumbers.push(randomNum);
     } else {
@@ -23,20 +24,19 @@ function MovieYearQuiz() {
     }
   }
 
-  const firstMovieIndex = randomNum[0];
-  const secondMovieIndex = randomNum[1];
-  const thirdMovieIndex = randomNum[2];
-  const fourthMovieIndex = randomNum[3];
-  const fifthMovieIndex = randomNum[4];
+  const firstMovieIndex = randomNumbers[0];
+  const secondMovieIndex = randomNumbers[1];
+  const thirdMovieIndex = randomNumbers[2];
+  const fourthMovieIndex = randomNumbers[3];
+  const fifthMovieIndex = randomNumbers[4];
 
   console.log(randomNumbers);
   const makeRandomNumber = (n) => (Math.floor(Math.random(0) * (n - 1) + 1));
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await movieApi.popular(makeRandomNumber(10));
+      const { data } = await movieApi.popular(makeRandomNumber(7));
       console.log(data);
-
       setFirstMovie(`https://image.tmdb.org/t/p/original${data.results[firstMovieIndex].poster_path}`);
       setSecondMovie(`https://image.tmdb.org/t/p/original${data.results[secondMovieIndex].poster_path}`);
       setThirdMovie(`https://image.tmdb.org/t/p/original${data.results[thirdMovieIndex].poster_path}`);
@@ -44,7 +44,9 @@ function MovieYearQuiz() {
       setFifthMovie(`https://image.tmdb.org/t/p/original${data.results[fifthMovieIndex].poster_path}`);
     };
     getData();
-  }, [score]);
+  }, []);
+
+  console.log(firstMovie);
 
   return (
     <div>
