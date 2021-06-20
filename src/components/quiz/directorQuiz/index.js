@@ -12,7 +12,6 @@ function DirectorQuiz() {
   const [selectedMovie, setSelectedMovie] = useState([]);
   const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
   let movieLists = [];
-  let tmpMovie = null;
   const getFormatDate = (date) => {
     const year = date.getFullYear();
     let month = (1 + date.getMonth());
@@ -78,9 +77,6 @@ function DirectorQuiz() {
       .then((res) => {
         console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
         return res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
-      })
-      .then((tmp) => {
-        tmpMovie = tmp;
       })
       .then((tmpMovie) => {
         console.log(tmpMovie);
