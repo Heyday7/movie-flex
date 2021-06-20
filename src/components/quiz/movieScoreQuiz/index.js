@@ -22,6 +22,7 @@ function MovieScoreQuiz() {
       correctModal.classList.remove('correct-on');
     }, 1000);
   };
+
   const choiceLeft = () => {
     console.log('Left');
     if (leftScore >= rightScore) {
@@ -31,6 +32,7 @@ function MovieScoreQuiz() {
       popFailModal();
     }
   };
+
   const choiceRight = () => {
     if (leftScore <= rightScore) {
       popCorrectModal();
