@@ -159,6 +159,10 @@ nav {
   border-radius: 30px;
 }
 
+.correct-modal {
+  display: none;
+}
+
 .correct-on {
   display: flex;
   justify-content: center;

@@ -36,5 +36,7 @@ module.exports = {
     'no-undef': 0,
     'max-len': 0,
     'react/jsx-one-expression-per-line': 0,
+    'prefer-destructuring': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
   },
 };
