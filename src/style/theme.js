@@ -6,6 +6,7 @@ const lightColor = {
   lightred: '#FFF7F9',
   orange: '#fd7e14',
   yellow: '#ffc107',
+  lightyellow: '#FFF6D8',
   green: '#28a745',
   teal: '#20c997',
   blue: '#007bff',

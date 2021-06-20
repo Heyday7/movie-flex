@@ -20,6 +20,19 @@ const api = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
 });
 
+// response 인터셉터
+// axios.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const { config, response: { status } } = error;
+//     const originalRequest = config;
+//     if (status >= 400) {
+//       return sleepRequest(1000, originalRequest);
+//     }
+//     return Promise.reject(error);
+//   }
+// );
+
 export const movieApi = {
   nowPlaying: (page) => api.get('movie/now_playing', { params: { ...Params, page } }),
   upComing: (page) => api.get('movie/upcoming', { params: { ...Params, page } }),
