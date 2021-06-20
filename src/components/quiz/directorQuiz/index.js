@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
+import './logo.png';
 
 function DirectorQuiz() {
   const [movies, setMovies] = useState(null);
@@ -8,7 +9,7 @@ function DirectorQuiz() {
   const [director, setDirector] = useState(null);
   const [answerNum, setAnswerNum] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState([]);
-  const [answer, setAnswer] = useState(true);
+  const [score, setScore] = useState(0);
   const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
   let movieLists = [];
   const getFormatDate = (date) => {
@@ -41,7 +42,6 @@ function DirectorQuiz() {
     getData()
       .then((res) => {
         console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
-        // setMovies(res.data.boxOfficeResult.dailyBoxOfficeList.slice(1, 4));
         const movieNameList = [];
         // eslint-disable-next-line array-callback-return
         res.data.boxOfficeResult.dailyBoxOfficeList.slice(1, 4).map((movie) => {
@@ -52,7 +52,7 @@ function DirectorQuiz() {
         movieLists = movieNameList;
         console.log(movieLists);
       });
-  }, []);
+  }, [score]);
   useEffect(() => {
     const getData1 = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -105,7 +105,7 @@ function DirectorQuiz() {
               });
           });
       });
-  }, []);
+  }, [score]);
   const onChangeAnswerBox = (movie) => {
     if (selectedMovie.includes(movie)) {
       setSelectedMovie(selectedMovie.filter((selmovie) => selmovie !== movie));
@@ -120,6 +120,8 @@ function DirectorQuiz() {
     console.log(`selectMovies${selectMovies}`);
     if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
       alert('정답입니다!');
+      setSelectedMovie([]);
+      setScore(score + 1);
     } else {
       alert('틀렸습니다!');
     }
@@ -137,7 +139,7 @@ function DirectorQuiz() {
           <div className="division_bar_2"> divbar </div>
         </div>
       </header>
-      <body>
+      <div>
         <div className="quiz4">4. 감독으로 영화 맞추기</div>
         <div className="question4">다음 영화감독이 만든 작품을 모두 골라보세요</div>
         <div className="director_box">
@@ -148,6 +150,10 @@ function DirectorQuiz() {
             <div>
               대표작:
               {dirMovies[0]}
+            </div>
+            <div>
+              맞은 개수:
+              {score}
             </div>
             <ul className="answer_sheet">
               { movies.map((movie) => (
@@ -170,7 +176,7 @@ function DirectorQuiz() {
         <div>
           <button className="next_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
         </div>
-      </body>
+      </div>
     </div>
   );
 }
