@@ -13,7 +13,6 @@ function MovieNameRelayQuiz() {
   const [userAnswer, setUserAnswer] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isCorrect, setCorrect] = useState(false);
-
   const makeRandomNumber = (n) => (Math.floor(Math.random(0) * (n - 1) + 1));
 
   const popFailModal = () => {
@@ -65,6 +64,8 @@ function MovieNameRelayQuiz() {
   useEffect(() => {
     setData();
   }, [score]);
+  // 힌트 ㅎㅎ
+  console.log(titleAnswer);
 
   return (
     <>
@@ -83,8 +84,6 @@ function MovieNameRelayQuiz() {
         <div className="question-box">
           <div className="quiz-content-hint">{ titleHint }</div>
           <div className="quiz-content-quiz">{ '? '.repeat(answerLength) }</div>
-          {/* 아랫줄은 배포시 삭제해야하는 코드 */}
-          <div>{ titleAnswer }</div>
         </div>
         <div className="answer-box">
           <div className="answer-box-title">답:</div>
