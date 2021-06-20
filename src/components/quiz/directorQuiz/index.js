@@ -7,9 +7,8 @@ function DirectorQuiz() {
   const [dirMovies, setDirMovies] = useState(null);
   const [director, setDirector] = useState(null);
   const [answerNum, setAnswerNum] = useState(null);
-  const [answer, setAnswer] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState([]);
+  const [answer, setAnswer] = useState(true);
   const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
   let movieLists = [];
   const getFormatDate = (date) => {
@@ -33,18 +32,6 @@ function DirectorQuiz() {
     }
     return array;
   };
-  const setMovieData = (movieNames) => {
-    setMovies(movieNames);
-  };
-  // const setQuizData = (movieNameList) => {
-  //   console.log(movieNameList);
-  //   setAnswerNum(movieNameList.length);
-  //   const ansMovies = [
-  //     ...movieNameList,
-  //     ...movieLists
-  //   ];
-  //   setMovieData(shuffleArray(ansMovies));
-  // };
   useEffect(() => {
     const getData = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -72,7 +59,6 @@ function DirectorQuiz() {
       // eslint-disable-next-line no-return-await
       return await movieApi.boxOfficeData(randDate);
     };
-    setIsLoading(true);
     getData1()
       .then((res) => {
         console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
@@ -116,14 +102,6 @@ function DirectorQuiz() {
                   ...movieLists
                 ];
                 setMovies(shuffleArray(ansMovies));
-              })
-              .then(() => {
-                if (dirMovies && movies && answerNum) {
-                  setIsLoading(false);
-                }
-                console.log(isLoading);
-                console.log(dirMovies);
-                console.log(movies);
               });
           });
       });
@@ -137,7 +115,15 @@ function DirectorQuiz() {
     console.log('selected!');
     console.log(selectedMovie);
   };
-  console.log(randomDate(new Date(2010, 0, 1), new Date()));
+  const onClickCertifyAnswer = (selectMovies) => {
+    console.log(`dirMovies${dirMovies}`);
+    console.log(`selectMovies${selectMovies}`);
+    if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
+      alert('정답입니다!');
+    } else {
+      alert('틀렸습니다!');
+    }
+  };
   return (
     <div>
       <header>
@@ -157,7 +143,7 @@ function DirectorQuiz() {
         <div className="director_box">
           {director}
         </div>
-        { !isLoading && (
+        { dirMovies && movies && answerNum && (
           <div>
             <div>
               대표작:
@@ -182,7 +168,7 @@ function DirectorQuiz() {
           </div>
         )}
         <div>
-          <button className="next_button">정답 확인</button>
+          <button className="next_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
         </div>
       </body>
     </div>
