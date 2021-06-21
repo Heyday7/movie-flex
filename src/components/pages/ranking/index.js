@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getScore } from '../../../firebase';
+import HeaderBar from '../../common/HeaderBar';
 
 function Ranking() {
-  return <div>Ranking</div>;
+  useEffect(() => {
+    getScore();
+  }, []);
+
+  return (
+    <div>
+      <HeaderBar />
+      Ranking
+    </div>
+  );
 }
 
 export default Ranking;

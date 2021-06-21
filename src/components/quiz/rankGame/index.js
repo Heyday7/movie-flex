@@ -1,7 +1,13 @@
 import React from 'react';
+import HeaderBar from '../../common/HeaderBar';
 
 function rankGame() {
-  return <div>rankGame</div>;
+  return (
+    <div>
+      <HeaderBar />
+      RankGame
+    </div>
+  );
 }
 
 export default rankGame;
