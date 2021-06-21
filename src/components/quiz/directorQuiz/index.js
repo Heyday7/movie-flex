@@ -138,27 +138,8 @@ function DirectorQuiz() {
   };
   return (
     <div>
-      <Modal
-        showModal={showModal}
-        setshowModal={setShowModal}
-        confirmFunction={() => setShowModal(false)}
-        title="정답!"
-        contents={`현재까지 맞힌 개수: ${score}개 
-        확인 버튼을 누르시면 다음 문제로 넘어갑니다.`}
-      />
+      <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답입니다!" contents={`현재까지 맞힌 개수: ${score}개`} />
       <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}개`} />
-
-      <header>
-        <div className="nav_bar">
-          <span>
-            <img src={logo} alt="logo" className="logo" />
-          </span>
-          <span className="movieQuiz">영화퀴즈</span>
-        </div>
-        <div className="division_bar_1">
-          <div className="division_bar_2"> divbar </div>
-        </div>
-      </header>
       <div>
         <div className="quiz4">4. 감독으로 영화 맞추기</div>
         <div className="question4">{`다음 영화감독이 만든 작품을 모두 골라보세요 (답: ${answerNum}개)`}</div>

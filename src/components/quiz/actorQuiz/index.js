@@ -3,6 +3,7 @@ import { movieApi } from '../../../api/movieApi';
 import './actorQuiz.css';
 import logo from './logo.png';
 import Modal from '../../common/Modal';
+import HeaderBar from '../../common/HeaderBar';
 
 function ActorQuiz() {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들(임의의 영화 + 배우 출연 영화 1개)
@@ -102,17 +103,6 @@ function ActorQuiz() {
     <div>
       <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답!" contents={`현재까지 맞힌 개수: ${score}`} />
       <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}`} />
-      <header>
-        <div className="nav_bar">
-          <span>
-            <img src={logo} alt="logo" className="logo" />
-          </span>
-          <span className="movieQuiz">영화퀴즈</span>
-        </div>
-        <div className="division_bar_1">
-          <div className="division_bar_2"> divbar </div>
-        </div>
-      </header>
       <div>
         <div className="quiz4">5. 배우가 출연한 영화 고르기</div>
         <div className="question4">다음 배우가 출연한 영화를 고르세요</div>
