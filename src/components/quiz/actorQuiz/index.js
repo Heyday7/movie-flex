@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './actorQuiz.css';
 import logo from './logo.png';
+import Modal from '../../common/Modal';
 
 function ActorQuiz() {
-  const [movies, setMovies] = useState(null);
-  const [actorMovie, setActorMovie] = useState(null);
-  const [actor, setActor] = useState(null);
-  const [answerNum, setAnswerNum] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [score, setScore] = useState(0);
-  const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
-  const moviesNameList = [];
-  const moviesCdList = [];
+  const [movies, setMovies] = useState(null); // 보기에 나오는 영화들(임의의 영화 + 배우 출연 영화 1개)
+  const [actorMovie, setActorMovie] = useState(null); // 배우 출연 영화
+  const [actor, setActor] = useState(null); // 배우 이름
+  const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 이름
+  const [score, setScore] = useState(0); // 맞힌 개수
+  const moviesNameList = []; // 보기에 들어갈 임의의 영화를 받는 리스트
+  const moviesCdList = []; // 박스오피스 순위권 영화 코드를 받는 리스트
+  // modal state: true일 때 modal 출력
+  const [showModal, setShowModal] = useState(false);
+  const [showModalFail, setShowModalFail] = useState(false);
+  // date를 yyyymmdd로 전환
   const getFormatDate = (date) => {
     const year = date.getFullYear();
     let month = (1 + date.getMonth());
@@ -21,10 +24,12 @@ function ActorQuiz() {
     day = day >= 10 ? day : `0${day}`;
     return `${year}${month}${day}`;
   };
+  // start ~ end 사이 random한 date 반환
   const randomDate = (start, end) => {
     const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     return getFormatDate(date);
   };
+  // 배열 셔플
   const shuffleArray = (array) => {
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < array.length; i++) {
@@ -34,6 +39,7 @@ function ActorQuiz() {
     }
     return array;
   };
+  // 임의의 날짜 박스오피스 순위권 영화를 받아오고 1위 영화 출연 배우도 받아옵니다.
   useEffect(() => {
     const getData = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -85,15 +91,17 @@ function ActorQuiz() {
     console.log(`actorMovie${actorMovie}`);
     console.log(`selectMovie${selectMovie}`);
     if (selectMovie === actorMovie) {
-      alert('정답입니다!');
       setSelectedMovie([]);
       setScore(score + 1);
+      setShowModal(true);
     } else {
-      alert('틀렸습니다!');
+      setShowModalFail(true);
     }
   };
   return (
     <div>
+      <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답!" contents={`현재까지 맞힌 개수: ${score}`} />
+      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}`} />
       <header>
         <div className="nav_bar">
           <span>
@@ -108,7 +116,7 @@ function ActorQuiz() {
       <div>
         <div className="quiz4">5. 배우가 출연한 영화 고르기</div>
         <div className="question4">다음 배우가 출연한 영화를 고르세요</div>
-        <div className="director_box">
+        <div className="actor_box">
           {actor}
         </div>
         { movies && actorMovie && (
@@ -136,7 +144,7 @@ function ActorQuiz() {
           </div>
         )}
         <div>
-          <button className="next_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
+          <button className="submit_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
         </div>
       </div>
     </div>

@@ -2,16 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
 import logo from './logo.png';
+import Modal from '../../common/Modal';
 
 function DirectorQuiz() {
-  const [movies, setMovies] = useState(null);
-  const [dirMovies, setDirMovies] = useState(null);
-  const [director, setDirector] = useState(null);
-  const [answerNum, setAnswerNum] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState([]);
-  const [score, setScore] = useState(0);
+  const [movies, setMovies] = useState(null); // 보기에 나오는 영화들 (임의의 영화 + 감독이 만든 영화 셔플)
+  const [dirMovies, setDirMovies] = useState(null); // 감독이 만든 영화들 (3개 이하로 세팅)
+  const [director, setDirector] = useState(null); // 감독
+  const [answerNum, setAnswerNum] = useState(null); // 정답 개수
+  const [selectedMovie, setSelectedMovie] = useState([]); // 선택된 영화 리스트
+  const [score, setScore] = useState(0); // 맞힌 개수
+  // modal state: true일 때 modal 출력
+  const [showModal, setShowModal] = useState(false);
+  const [showModalFail, setShowModalFail] = useState(false);
+  // default 감독들(감독 데이터 없는 영화시 default 값으로 전환
   const defaultdirectors = ['존 파브로', '봉준호', '스티븐 스필버그', '제임스 카메론', '홍상수', '크리스토퍼 놀란', '김기덕', '미야자키 하야오'];
   let movieLists = [];
+  // date를 yyyymmdd로 전환
   const getFormatDate = (date) => {
     const year = date.getFullYear();
     let month = (1 + date.getMonth());
@@ -20,10 +26,12 @@ function DirectorQuiz() {
     day = day >= 10 ? day : `0${day}`;
     return `${year}${month}${day}`;
   };
+  // start ~ end 사이 random한 date 반환
   const randomDate = (start, end) => {
     const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     return getFormatDate(date);
   };
+  // 배열 셔플
   const shuffleArray = (array) => {
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < array.length; i++) {
@@ -33,6 +41,7 @@ function DirectorQuiz() {
     }
     return array;
   };
+  // 임의의 날짜 박스오피스 순위 1~3위 영화를 movieLists에 넣습니다.
   useEffect(() => {
     const getData = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -53,6 +62,7 @@ function DirectorQuiz() {
         console.log(movieLists);
       });
   }, [score]);
+  // 임의의 날짜 1위 영화의 감독을 받아온 뒤 그 감독의 영화들 중 3개 이하를 받아옵니다.
   useEffect(() => {
     const getData1 = async () => {
       const randDate = randomDate(new Date(2010, 0, 1), new Date());
@@ -119,15 +129,25 @@ function DirectorQuiz() {
     console.log(`dirMovies${dirMovies}`);
     console.log(`selectMovies${selectMovies}`);
     if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
-      alert('정답입니다!');
       setSelectedMovie([]);
       setScore(score + 1);
+      setShowModal(true);
     } else {
-      alert('틀렸습니다!');
+      setShowModalFail(true);
     }
   };
   return (
     <div>
+      <Modal
+        showModal={showModal}
+        setshowModal={setShowModal}
+        confirmFunction={() => setShowModal(false)}
+        title="정답!"
+        contents={`현재까지 맞힌 개수: ${score}개 
+        확인 버튼을 누르시면 다음 문제로 넘어갑니다.`}
+      />
+      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}개`} />
+
       <header>
         <div className="nav_bar">
           <span>
@@ -141,7 +161,7 @@ function DirectorQuiz() {
       </header>
       <div>
         <div className="quiz4">4. 감독으로 영화 맞추기</div>
-        <div className="question4">다음 영화감독이 만든 작품을 모두 골라보세요</div>
+        <div className="question4">{`다음 영화감독이 만든 작품을 모두 골라보세요 (답: ${answerNum}개)`}</div>
         <div className="director_box">
           {director}
         </div>
@@ -174,7 +194,7 @@ function DirectorQuiz() {
           </div>
         )}
         <div>
-          <button className="next_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
+          <button className="submit_button" onClick={() => onClickCertifyAnswer(selectedMovie)}>정답 확인</button>
         </div>
       </div>
     </div>
