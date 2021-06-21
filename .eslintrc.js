@@ -13,6 +13,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'indent': 'off',
+    'linebreak-style': ['error', 'windows'],
     'eslintreact/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': 0,
@@ -38,5 +40,6 @@ module.exports = {
     'react/jsx-one-expression-per-line': 0,
     'prefer-destructuring': 0,
     'jsx-a11y/no-static-element-interactions': 0,
+    'react/no-array-index-key': 0
   },
 };
