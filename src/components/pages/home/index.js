@@ -24,33 +24,35 @@ const S = {
 
     &:hover {
       transform: translateY(-5%);
-      transition: transform .5s ease;
+      transition: transform 0.5s ease;
     }
-  `
+  `,
 };
 function Home({ history }) {
   console.log(history);
   return (
-    <S.GameWrapper>
-      <S.Game>
-        <div onClick={() => history.push('/actor-quiz')}>영화 배우 퀴즈</div>
-      </S.Game>
-      <S.Game onClick={() => history.push('/director-quiz')}>
-        영화 감독 퀴즈
-      </S.Game>
-      <S.Game onClick={() => history.push('/initial-quiz')}>
-        영화 초성 퀴즈
-      </S.Game>
-      <S.Game onClick={() => history.push('/movie-name-relay-quiz')}>
-        영화 이름 끝말잇기
-      </S.Game>
-      <S.Game onClick={() => history.push('/movie-score-quiz')}>
-        영화 점수 퀴즈
-      </S.Game>
-      <S.Game onClick={() => history.push('/movie-year-quiz')}>
-        영화 년도 퀴즈
-      </S.Game>
-    </S.GameWrapper>
+    <>
+      <S.GameWrapper>
+        <S.Game onClick={() => history.push('/actor-quiz')}>
+          영화 배우 퀴즈
+        </S.Game>
+        <S.Game onClick={() => history.push('/director-quiz')}>
+          영화 감독 퀴즈
+        </S.Game>
+        <S.Game onClick={() => history.push('/initial-quiz')}>
+          영화 초성 퀴즈
+        </S.Game>
+        <S.Game onClick={() => history.push('/movie-name-relay-quiz')}>
+          영화 이름 끝말잇기
+        </S.Game>
+        <S.Game onClick={() => history.push('/movie-score-quiz')}>
+          영화 점수 퀴즈
+        </S.Game>
+        <S.Game onClick={() => history.push('/movie-year-quiz')}>
+          영화 년도 퀴즈
+        </S.Game>
+      </S.GameWrapper>
+    </>
   );
 }
 
