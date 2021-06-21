@@ -12,10 +12,11 @@ const S = {
     justify-items: center;
   `,
   Game: styled.div`
-    width: 350px;
+    width: 300px;
     height: 200px;
     border: 2px solid black;
     border-radius: 6px;
+    background: var(--adaptiveGray50);
 
     display: flex;
     justify-content: center;
@@ -23,8 +24,9 @@ const S = {
     cursor: pointer;
 
     &:hover {
-      transform: translateY(-5%);
-      transition: transform 0.5s ease;
+      transform: translateY(-2.5%);
+      background: var(--adaptiveGray600);
+      transition: all 0.5s ease;
     }
   `,
 };

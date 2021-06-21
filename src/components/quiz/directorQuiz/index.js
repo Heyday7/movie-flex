@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
-import logo from './logo.png';
 import Modal from '../../common/Modal';
 
 function DirectorQuiz() {
