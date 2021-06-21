@@ -22,10 +22,10 @@ function HeaderBar(props) {
     <div className="HeaderBar">
       <div className="nav">
         <Link to="/">
-          <img alt="" src={film} />
+          <img className="logo" alt="" src={film} />
         </Link>
-        <Link to="/"><div>영화퀴즈</div></Link>
-        <Link to="/ranking"><div>랭킹</div></Link>
+        <Link to="/"><div className="header-menu">영화퀴즈</div></Link>
+        <Link to="/ranking"><div className="header-menu">랭킹</div></Link>
       </div>
       <div className="AboutUser">
         { user

@@ -106,6 +106,7 @@ function InitialQuiz() {
       mostPopularMovie.title = cleanUpTitle;
 
       setmovieData(mostPopularMovie);
+      console.log(mostPopularMovie.title);
     } catch (error) {
       console.log(error);
       toast.error(`sorry. error occured ${error.message}`);

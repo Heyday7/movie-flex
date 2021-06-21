@@ -9,7 +9,6 @@ function Ranking() {
 
   return (
     <div>
-      <HeaderBar />
       Ranking
     </div>
   );
