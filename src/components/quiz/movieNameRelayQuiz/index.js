@@ -63,8 +63,6 @@ function MovieNameRelayQuiz() {
   useEffect(() => {
     setData();
   }, [score]);
-  // 힌트 ㅎㅎ
-  console.log(titleAnswer);
 
   return (
     <>

@@ -64,11 +64,15 @@ const S = {
       }
       .link-to-main {
           font-weight: 600;
-          color: green;
+          color: red;
           font-size: ${(props) => props.theme.fontSizes.base};
       }
     }
   `,
+};
+
+const refreshPage = () => {
+  window.location.reload();
 };
 
 function Modal({
@@ -81,7 +85,10 @@ function Modal({
           <div className="modal">
             <div className="modal-title">{title}</div>
             {isCorrect || (
-              <Link className="link-to-main" to="/">메인화면으로 돌아가기</Link>
+              <>
+                <div className="regame" style={{ color: 'blue', fontWeight: '600' }} onClick={refreshPage}>다시하기</div>
+                <Link className="link-to-main" to="/">메인화면으로 돌아가기</Link>
+              </>
             )}
           </div>
         </S.Wrapper>
