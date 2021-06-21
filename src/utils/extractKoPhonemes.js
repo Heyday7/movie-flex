@@ -3,7 +3,7 @@ import {
 } from '../_constants';
 
 function extractKoPhonemes(char) {
-  // 한글이 아니면 false
+  // 한글이 아니면 그냥 내보내기
   if (!char.match(/[ㄱ-ㅎ가-힣]/)) {
     return char;
   }
@@ -32,7 +32,12 @@ function extractKoPhonemes(char) {
     finale = FINALES[finaleOffset];
   }
   return {
-    initial, medial, finale, initialOffset, medialOffset, finaleOffset
+    initial,
+    medial,
+    finale,
+    initialOffset,
+    medialOffset,
+    finaleOffset,
   };
 }
 
