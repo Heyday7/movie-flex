@@ -8,14 +8,3 @@ afterEach(cleanup);
 test('should 3', () => {
   expect(3).toBe(3);
 });
-
-// describe('Header', () => {
-//   test('render App', () => {
-//     render(
-//       <MemoryRouter>
-//         <App />
-//       </MemoryRouter>
-//     );
-//     screen.debug();
-//   });
-// });

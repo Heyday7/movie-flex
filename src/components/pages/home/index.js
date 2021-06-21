@@ -29,7 +29,6 @@ const S = {
   `,
 };
 function Home({ history }) {
-  console.log(history);
   return (
     <>
       <S.GameWrapper>
