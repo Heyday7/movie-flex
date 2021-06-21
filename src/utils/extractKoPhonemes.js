@@ -32,7 +32,12 @@ function extractKoPhonemes(char) {
     finale = FINALES[finaleOffset];
   }
   return {
-    initial, medial, finale, initialOffset, medialOffset, finaleOffset
+    initial,
+    medial,
+    finale,
+    initialOffset,
+    medialOffset,
+    finaleOffset,
   };
 }
 
