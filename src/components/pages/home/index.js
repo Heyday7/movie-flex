@@ -8,8 +8,8 @@ const S = {
     grid-gap: 6px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
-    align-items: center; /* 셀 내에서 세로 center */
-    justify-items: center; /* 셀 내에서 가로 flex-end */
+    align-items: center;
+    justify-items: center;
   `,
   Game: styled.div`
     width: 350px;

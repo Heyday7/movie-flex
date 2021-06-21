@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { movieApi } from '../../../api/movieApi';
-import logo from './logo.png';
 import arrow from './arrow.png';
 import './movieYearQuiz.css';
 import Modal from '../../common/Modal';
