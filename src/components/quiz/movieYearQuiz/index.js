@@ -23,11 +23,11 @@ function MovieYearQuiz() {
   // modal state: true일 때 modal 출력
   const [showModal, setShowModal] = useState(false);
   const [showModalFail, setShowModalFail] = useState(false);
-  /* 1부터 24까지의 랜덤한 자연수 중 중복 없이 5개를 뽑아서 배열에 넣는다. */
+  /* 1부터 20까지의 랜덤한 자연수 중 중복 없이 5개를 뽑아서 배열에 넣는다. */
   const randomNumbers = [];
 
   for (let i = 0; i < 5; i += 1) {
-    const randomNum = Math.floor(Math.random() * 24);
+    const randomNum = Math.floor(Math.random() * 19) + 1;
     if (randomNumbers.indexOf(randomNum) === -1) {
       randomNumbers.push(randomNum);
     } else {
@@ -58,7 +58,6 @@ function MovieYearQuiz() {
       randomMoviesList.push(randomNumbers.slice(0, 5).map((number) => data.results[number]));
       console.log(randomMoviesList);
       setRandomMovies(randomMoviesList);
-      console.log(randomMoviesList.flat().release_date);
 
       /* 다섯 영화의 날짜를 비교해서 오름차순으로 정렬하여 새로운 배열에 넣는다. */
       const dateAscending = (a, b) => {
@@ -80,13 +79,19 @@ function MovieYearQuiz() {
   answerArray.push(thirdAnswer);
   answerArray.push(fourthAnswer);
   answerArray.push(fifthAnswer);
-  console.log(answerArray);
+  // console.log(randomMovies.flat()[answerArray[1]]);
 
-  /* 첫 번째부터 답으로 입력한 랜덤 배열의 해당 인덱스 영화와 오름차순 배열의 앞에서부터 영화가 일치하는지 확인한다. */
+  /* 첫 번째부터 랜덤 배열의 답으로 입력한 인덱스 영화와 오름차순 배열의 앞에서부터 영화가 일치하는지 확인한다. */
   const checkAnswer = (e) => {
+    console.log(sortedMovies.flat()[0]?.title);
+    console.log(answerArray);
+    console.log(answerArray[0]);
+    console.log(randomMovies.flat()[answerArray[0]]?.title);
+    console.log(answerArray.map((answer) => parseInt(answer, 10) - 1));
+    let count = 0;
     for (let i = 0; i < 5; i += 1) {
-      let count = 0;
-      if (randomMovies[answerArray[i]] !== sortedMovies[i]) {
+      const answerArrayIndex = answerArray.map((answer) => parseInt(answer, 10) - 1);
+      if (randomMovies.flat()[answerArrayIndex[i]]?.title !== sortedMovies.flat()[i]?.title) {
         setShowModalFail(true);
         setFirstAnswer('');
         setSecondAnswer('');
@@ -96,14 +101,14 @@ function MovieYearQuiz() {
         break;
       } else {
         count += 1;
-        console.log(count);
-        if (count === 5) {
-          setScore(score + 1);
-          setShowModal(true);
+          }
+      if (count === 5) {
+        setScore(score + 1);
+        setShowModal(true);
         }
+      console.log(count);
       }
-    }
-  };
+    };
 
     return (
 
@@ -123,18 +128,6 @@ function MovieYearQuiz() {
           contents={`현재까지 맞힌 개수: ${score}개`}
         />
 
-        <header>
-          <div className="nav_bar">
-            <div>
-              <img src={logo} alt="logo" id="logo" />
-            </div>
-            <div className="movieQuiz">영화퀴즈</div>
-            <div className="ranking">랭킹</div>
-          </div>
-          <div className="division_bar_1">
-            <div className="division_bar_2"> divbar</div>
-          </div>
-        </header>
         <body>
           <div className="quiz6">6. 영화 개봉 순서 맞추기</div>
           <div className="question6">다음 영화들을 개봉한 순서대로 나열해보세요.</div>
@@ -142,23 +135,23 @@ function MovieYearQuiz() {
             <div className="posters">
               <div className="poster">
                 <img src={firstMovie} alt="" className="posterImage" />
-                1
+                <div className="number">1</div>
               </div>
               <div className="poster">
                 <img src={secondMovie} alt="" className="posterImage" />
-                2
+                <div className="number">2</div>
               </div>
               <div className="poster">
                 <img src={thirdMovie} alt="" className="posterImage" />
-                3
+                <div className="number">3</div>
               </div>
               <div className="poster">
                 <img src={fourthMovie} alt="" className="posterImage" />
-                4
+                <div className="number">4</div>
               </div>
               <div className="poster">
                 <img src={fifthMovie} alt="" className="posterImage" />
-                5
+                <div className="number">5</div>
               </div>
 
             </div>
