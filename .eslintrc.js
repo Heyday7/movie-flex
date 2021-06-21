@@ -14,7 +14,6 @@ module.exports = {
   plugins: ['react'],
   rules: {
     indent: 'off',
-    'linebreak-style': ['error', 'windows'],
     'eslintreact/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': 0,
@@ -42,5 +41,6 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/no-array-index-key': 0,
     'eol-last': 0,
+    'no-constant-condition': 0
   },
 };

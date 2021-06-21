@@ -50,7 +50,7 @@ function MovieScoreQuiz() {
       const { data } = await movieApi.popular(makeRandomNumber(7));
       const leftNumber = makeRandomNumber(20);
       let rightNumber = 0;
-      while (1) {
+      while (true) {
         const tmp = makeRandomNumber(20);
         if (tmp !== leftNumber) {
           rightNumber = tmp;
