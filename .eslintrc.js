@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'indent': 'off',
     'linebreak-style': ['error', 'windows'],
     'eslintreact/jsx-filename-extension': 0,
     'react/react-in-jsx-scope': 0,
