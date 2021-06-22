@@ -3,7 +3,7 @@ import { movieApi } from '../../../api/movieApi';
 import './actorQuiz.css';
 import Modal from '../../common/Modal';
 
-function ActorQuiz() {
+function ActorQuiz(props) {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들(임의의 영화 + 배우 출연 영화 1개)
   const [actorMovie, setActorMovie] = useState(null); // 배우 출연 영화
   const [actor, setActor] = useState(null); // 배우 이름
@@ -85,16 +85,24 @@ function ActorQuiz() {
     console.log(`selected!${selectedMovie}`);
   };
   const onClickCertifyAnswer = (selectMovie) => {
-    console.log(`actorMovietype${typeof (actorMovie)}`);
-    console.log(`selectMovietype${typeof (selectMovie)}`);
-    console.log(`actorMovie${actorMovie}`);
-    console.log(`selectMovie${selectMovie}`);
-    if (selectMovie === actorMovie) {
-      setSelectedMovie([]);
-      setScore(score + 1);
-      setShowModal(true);
+    if (props.isRank) {
+      if (selectMovie === actorMovie) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
     } else {
-      setShowModalFail(true);
+      console.log(`actorMovietype${typeof (actorMovie)}`);
+      console.log(`selectMovietype${typeof (selectMovie)}`);
+      console.log(`actorMovie${actorMovie}`);
+      console.log(`selectMovie${selectMovie}`);
+      if (selectMovie === actorMovie) {
+        setSelectedMovie([]);
+        setScore(score + 1);
+        setShowModal(true);
+      } else {
+        setShowModalFail(true);
+      }
     }
   };
   return (
