@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
-import logo from './logo.png';
 import Modal from '../../common/Modal';
 
 function DirectorQuiz() {
@@ -9,6 +8,7 @@ function DirectorQuiz() {
   const [dirMovies, setDirMovies] = useState(null); // 감독이 만든 영화들 (3개 이하로 세팅)
   const [director, setDirector] = useState(null); // 감독
   const [answerNum, setAnswerNum] = useState(null); // 정답 개수
+  const [failScore, setFailScore] = useState(0); // 틀린 개수
   const [selectedMovie, setSelectedMovie] = useState([]); // 선택된 영화 리스트
   const [score, setScore] = useState(0); // 맞힌 개수
   // modal state: true일 때 modal 출력
@@ -50,16 +50,15 @@ function DirectorQuiz() {
     };
     getData()
       .then((res) => {
-        console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
+        // console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
         const movieNameList = [];
         // eslint-disable-next-line array-callback-return
         res.data.boxOfficeResult.dailyBoxOfficeList.slice(1, 4).map((movie) => {
           movieNameList.push(movie.movieNm);
         });
-        console.log('movielist');
-        console.log(movieNameList);
+        // console.log('movielist');
         movieLists = movieNameList;
-        console.log(movieLists);
+        // console.log(movieLists);
       });
   }, [score]);
   // 임의의 날짜 1위 영화의 감독을 받아온 뒤 그 감독의 영화들 중 3개 이하를 받아옵니다.
@@ -70,16 +69,13 @@ function DirectorQuiz() {
       return await movieApi.boxOfficeData(randDate);
     };
     getData1()
-      .then((res) => {
-        console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
-        return res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
-      })
+      .then((res) => res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm)
       .then((tmpMovie) => {
-        console.log(tmpMovie);
+        // console.log(tmpMovie);
         const getDirector = async (tmpMovie) => {
           const { data } = await movieApi.movieListByName(tmpMovie);
-          console.log('data!!');
-          console.log(data);
+          // console.log('data!!');
+          // console.log(data);
           if (data.movieListResult.movieList[0].directors[0] !== undefined) {
             return data.movieListResult.movieList[0].directors[0].peopleNm;
           }
@@ -90,8 +86,8 @@ function DirectorQuiz() {
             setDirector(dir);
             const getDirMovies = async (dir) => {
               const { data } = await movieApi.movieListByDirector(dir);
-              console.log('movielistbydirector');
-              console.log(data);
+              // console.log('movielistbydirector');
+              // console.log(data);
               return data.movieListResult.movieList;
             };
             getDirMovies(dir)
@@ -104,7 +100,7 @@ function DirectorQuiz() {
                 if (dirMovieNameList.length >= 4) {
                   dirMovieNameList.splice(3, dirMovieNameList.length - 3);
                 }
-                console.log(dirMovieNameList);
+                // console.log(dirMovieNameList);
                 setDirMovies(dirMovieNameList);
                 setAnswerNum(dirMovieNameList.length);
                 const ansMovies = [
@@ -115,31 +111,36 @@ function DirectorQuiz() {
               });
           });
       });
-  }, [score]);
+  }, [score, failScore]);
   const onChangeAnswerBox = (movie) => {
     if (selectedMovie.includes(movie)) {
       setSelectedMovie(selectedMovie.filter((selmovie) => selmovie !== movie));
     } else {
       setSelectedMovie([...selectedMovie, movie]);
     }
-    console.log('selected!');
-    console.log(selectedMovie);
+    // console.log('selected!');
+    // console.log(selectedMovie);
   };
   const onClickCertifyAnswer = (selectMovies) => {
-    console.log(`dirMovies${dirMovies}`);
-    console.log(`selectMovies${selectMovies}`);
+    // console.log(`dirMovies${dirMovies}`);
+    // console.log(`selectMovies${selectMovies}`);
     if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
       setSelectedMovie([]);
       setScore(score + 1);
       setShowModal(true);
     } else {
+      setSelectedMovie([]);
       setShowModalFail(true);
     }
+  };
+  const onConfirmFail = () => {
+    setFailScore(failScore + 1);
+    setShowModalFail(false);
   };
   return (
     <div>
       <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답입니다!" contents={`현재까지 맞힌 개수: ${score}개`} />
-      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}개`} />
+      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => onConfirmFail()} title="틀렸습니다!" contents={`정답: ${dirMovies}`} />
       <div>
         <div className="quiz4">4. 감독으로 영화 맞추기</div>
         <div className="question4">{`다음 영화감독이 만든 작품을 모두 골라보세요 (답: ${answerNum}개)`}</div>
