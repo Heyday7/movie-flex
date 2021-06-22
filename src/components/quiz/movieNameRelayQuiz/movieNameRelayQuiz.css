@@ -1,0 +1,124 @@
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.question-header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.question-title {
+  margin-bottom: 30px;
+  font-family: BBTreeGo_R;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+  color: #828282;
+}
+
+.question-content {
+  margin-left: 30px;
+  font-family: BBTreeGo_R;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.current-score {
+  font-size: 24px;
+  margin-top: 70px;
+  margin-right: 100px;
+}
+
+.question-box1 {
+  margin: 70px auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 130px;
+  background: #fff6d8;
+}
+
+.quiz-content-hint {
+  margin-right: 0px;
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 65px;
+  text-align: center;
+
+  color: #000000;
+}
+
+.quiz-content-quiz {
+  flex-grow: 0;
+  background-color: #fed130;
+
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 65px;
+  text-align: center;
+}
+
+.answer-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.answer-box-title {
+  font-family: BBTreeGo_R;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+  margin-right: 20px;
+  text-align: center;
+  color: #000000;
+}
+
+.answer-box-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 350px;
+  height: 60px;
+  font-size: 20px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.answer-button {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 60px;
+
+  color: #ffffff;
+  font-family: BBTreeGo_R;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+
+  background: #000000;
+  border-radius: 10px;
+}
