@@ -29,8 +29,8 @@ function HeaderBar(props) {
       </div>
       <div className="AboutUser">
         { user
-          ? <><div>안녕하세요 {user}님</div><button onClick={logout}>로그아웃</button></>
-          : <button onClick={login}>로그인</button> }
+            ? <><div>안녕하세요 {user}님</div><button onClick={logout}>로그아웃</button></>
+            : <button onClick={login}>로그인</button> }
       </div>
     </div>
   );
