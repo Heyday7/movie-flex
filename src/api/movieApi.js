@@ -38,7 +38,7 @@ const api = axios.create({
 });
 
 const api1 = axios.create({
-  baseURL: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/'
+  baseURL: 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/'
 });
 
 export const movieApi = {
