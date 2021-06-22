@@ -81,7 +81,7 @@ const getRandomNumber = (n) => Math.floor(Math.random() * n) + 1;
 const getMostPopularMovie = (arr) =>
   arr.reduce((acc, cur) => (acc?.popularity <= cur?.popularity ? cur : acc));
 
-function InitialQuiz() {
+function InitialQuiz(props) {
   const [movieData, setmovieData] = useState('');
   const [showHint, setShowHint] = useState(false);
   const [userInputValue, setuserInputValue] = useState('');
@@ -118,16 +118,20 @@ function InitialQuiz() {
   }, []);
 
   const onSubmitAnswer = () => {
-    if (userInputValue === movieData.title) {
+    if (props.isRank) {
+      if (userInputValue === movieData.title) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (userInputValue === movieData.title) {
       toast.success('맞음! 점수 + 1점');
-      setuserInputValue('');
-      getMovieData();
       setScore((prev) => prev + 1);
     } else {
       toast.error('틀림!');
-      setuserInputValue('');
-      getMovieData();
     }
+    setuserInputValue('');
+    getMovieData();
   };
 
   return (

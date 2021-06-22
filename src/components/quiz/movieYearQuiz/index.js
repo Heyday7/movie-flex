@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { movieApi } from '../../../api/movieApi';
-import logo from './logo.png';
-import arrow from './arrow.png';
+import arrow from '../../../style/asset/arrow.png';
 import './movieYearQuiz.css';
 import Modal from '../../common/Modal';
 
-function MovieYearQuiz() {
+function MovieYearQuiz(props) {
   const [firstMovie, setFirstMovie] = useState(null);
   const [secondMovie, setSecondMovie] = useState(null);
   const [thirdMovie, setThirdMovie] = useState(null);
   const [fourthMovie, setFourthMovie] = useState(null);
   const [fifthMovie, setFifthMovie] = useState(null);
-  const [firstAnswer, setFirstAnswer] = useState(null);
-  const [secondAnswer, setSecondAnswer] = useState(null);
-  const [thirdAnswer, setThirdAnswer] = useState(null);
-  const [fourthAnswer, setFourthAnswer] = useState(null);
-  const [fifthAnswer, setFifthAnswer] = useState(null);
+  const [firstAnswer, setFirstAnswer] = useState('');
+  const [secondAnswer, setSecondAnswer] = useState('');
+  const [thirdAnswer, setThirdAnswer] = useState('');
+  const [fourthAnswer, setFourthAnswer] = useState('');
+  const [fifthAnswer, setFifthAnswer] = useState('');
   const [randomMovies, setRandomMovies] = useState(null);
   const [sortedMovies, setSortedMovies] = useState(null);
   const [score, setScore] = useState(0);
@@ -92,6 +91,9 @@ function MovieYearQuiz() {
     for (let i = 0; i < 5; i += 1) {
       const answerArrayIndex = answerArray.map((answer) => parseInt(answer, 10) - 1);
       if (randomMovies.flat()[answerArrayIndex[i]]?.title !== sortedMovies.flat()[i]?.title) {
+        if (props.isRank) {
+          props.quizWrong();
+        }
         setShowModalFail(true);
         setFirstAnswer('');
         setSecondAnswer('');
@@ -101,8 +103,11 @@ function MovieYearQuiz() {
         break;
       } else {
         count += 1;
-          }
+      }
       if (count === 5) {
+        if (props.isRank) {
+          props.quizCorrect();
+        }
         setScore(score + 1);
         setShowModal(true);
         }
@@ -128,7 +133,7 @@ function MovieYearQuiz() {
           contents={`현재까지 맞힌 개수: ${score}개`}
         />
 
-        <body>
+        <div>
           <div className="quiz6">6. 영화 개봉 순서 맞추기</div>
           <div className="question6">다음 영화들을 개봉한 순서대로 나열해보세요.</div>
           <div className="image_box">
@@ -224,7 +229,7 @@ function MovieYearQuiz() {
           <div>
             <button className="next_button" onClick={(e) => checkAnswer(e)}>다음 퀴즈</button>
           </div>
-        </body>
+        </div>
       </div>
     );
 }

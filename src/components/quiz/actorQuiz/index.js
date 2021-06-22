@@ -4,7 +4,7 @@ import './actorQuiz.css';
 import Modal from '../../common/Modal';
 import HeaderBar from '../../common/HeaderBar';
 
-function ActorQuiz() {
+function ActorQuiz(props) {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들(임의의 영화 + 배우 출연 영화 1개)
   const [actorMovie, setActorMovie] = useState(null); // 배우 출연 영화
   const [actor, setActor] = useState(null); // 배우 이름
@@ -91,14 +91,20 @@ function ActorQuiz() {
     // console.log(`selectMovietype${typeof (selectMovie)}`);
     // console.log(`actorMovie${actorMovie}`);
     // console.log(`selectMovie${selectMovie}`);
-    if (selectMovie === actorMovie) {
-      setSelectedMovie([]);
-      setScore(score + 1);
-      setShowModal(true);
-    } else {
-      setSelectedMovie([]);
-      setShowModalFail(true);
-    }
+    if (props.isRank) {
+      if (selectMovie === actorMovie) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (selectMovie === actorMovie) {
+        setSelectedMovie([]);
+        setScore(score + 1);
+        setShowModal(true);
+      } else {
+        setSelectedMovie([]);
+        setShowModalFail(true);
+      }
   };
   const onConfirmFail = () => {
     setFailScore(failScore + 1);
@@ -116,10 +122,13 @@ function ActorQuiz() {
         </div>
         { movies && actorMovie && (
           <div className="hint">
-            <span>
-              맞은 개수:
-              {score}
-            </span>
+            {/* eslint-disable-next-line react/destructuring-assignment */}
+            { !props.isRank && (
+              <span>
+                맞은 개수:
+                {score}
+              </span>
+            )}
             <ul className="answer_sheet">
               { movies.map((movie) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events
@@ -145,5 +154,4 @@ function ActorQuiz() {
     </div>
   );
 }
-
 export default ActorQuiz;

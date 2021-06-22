@@ -8,14 +8,15 @@ const S = {
     grid-gap: 6px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
-    align-items: center; /* 셀 내에서 세로 center */
-    justify-items: center; /* 셀 내에서 가로 flex-end */
+    align-items: center;
+    justify-items: center;
   `,
   Game: styled.div`
-    width: 350px;
+    width: 300px;
     height: 200px;
     border: 2px solid black;
     border-radius: 6px;
+    background: var(--adaptiveGray50);
 
     display: flex;
     justify-content: center;
@@ -23,8 +24,9 @@ const S = {
     cursor: pointer;
 
     &:hover {
-      transform: translateY(-5%);
-      transition: transform 0.5s ease;
+      transform: translateY(-2.5%);
+      background: var(--adaptiveGray600);
+      transition: all 0.5s ease;
     }
   `,
 };

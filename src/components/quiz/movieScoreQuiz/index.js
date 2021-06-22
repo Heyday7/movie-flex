@@ -3,7 +3,7 @@ import './index.css';
 import { movieApi } from '../../../api/movieApi';
 import HoonsModal from '../../common/HoonsModal';
 
-function MovieScoreQuiz() {
+function MovieScoreQuiz(props) {
   const [leftMovie, setLeftMovie] = useState(null);
   const [rightMovie, setRigthMovie] = useState(null);
   const [leftScore, setLeftScore] = useState(0);
@@ -24,7 +24,13 @@ function MovieScoreQuiz() {
   };
 
   const choiceLeft = () => {
-    if (leftScore >= rightScore) {
+    if (props.isRank) {
+      if (leftScore >= rightScore) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (leftScore >= rightScore) {
       popCorrectModal();
       setScore(score + 1);
     } else {
@@ -33,7 +39,13 @@ function MovieScoreQuiz() {
   };
 
   const choiceRight = () => {
-    if (leftScore <= rightScore) {
+    if (props.isRank) {
+      if (leftScore <= rightScore) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (leftScore <= rightScore) {
       setCorrect(true);
       popCorrectModal();
       setScore(score + 1);
@@ -50,7 +62,7 @@ function MovieScoreQuiz() {
       const { data } = await movieApi.popular(makeRandomNumber(7));
       const leftNumber = makeRandomNumber(20);
       let rightNumber = 0;
-      while (1) {
+      while (true) {
         const tmp = makeRandomNumber(20);
         if (tmp !== leftNumber) {
           rightNumber = tmp;

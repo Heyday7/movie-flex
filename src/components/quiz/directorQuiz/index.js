@@ -3,7 +3,7 @@ import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
 import Modal from '../../common/Modal';
 
-function DirectorQuiz() {
+function DirectorQuiz(props) {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들 (임의의 영화 + 감독이 만든 영화 셔플)
   const [dirMovies, setDirMovies] = useState(null); // 감독이 만든 영화들 (3개 이하로 세팅)
   const [director, setDirector] = useState(null); // 감독
@@ -124,14 +124,20 @@ function DirectorQuiz() {
   const onClickCertifyAnswer = (selectMovies) => {
     // console.log(`dirMovies${dirMovies}`);
     // console.log(`selectMovies${selectMovies}`);
-    if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
-      setSelectedMovie([]);
-      setScore(score + 1);
-      setShowModal(true);
-    } else {
-      setSelectedMovie([]);
-      setShowModalFail(true);
-    }
+    if (props.isRank) {
+      if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
+          setSelectedMovie([]);
+          setScore(score + 1);
+          setShowModal(true);
+      } else {
+          setSelectedMovie([]);
+          setShowModalFail(true);
+      }
   };
   const onConfirmFail = () => {
     setFailScore(failScore + 1);
@@ -153,10 +159,13 @@ function DirectorQuiz() {
               대표작:
               {dirMovies[0]}
             </span>
-            <span>
-              맞은 개수:
-              {score}
-            </span>
+            {/* eslint-disable-next-line react/destructuring-assignment */}
+            { !props.isRank && (
+              <span>
+                맞은 개수:
+                {score}
+              </span>
+            )}
             <ul className="answer_sheet">
               { movies.map((movie) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events
@@ -182,5 +191,4 @@ function DirectorQuiz() {
     </div>
   );
 }
-
 export default DirectorQuiz;
