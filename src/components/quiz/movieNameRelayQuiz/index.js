@@ -3,7 +3,7 @@ import './movieNameRelayQuiz.css';
 import { movieApi } from '../../../api/movieApi';
 import HoonsModal from '../../common/HoonsModal';
 
-function MovieNameRelayQuiz() {
+function MovieNameRelayQuiz(props) {
   const [movieTitle, setTitle] = useState(null);
   const [titleHint, setHint] = useState(null);
   const [titleAnswer, setAnswer] = useState(null);
@@ -45,7 +45,13 @@ function MovieNameRelayQuiz() {
   const checkAnswer = (e) => {
     const answer = titleAnswer.toUpperCase().replace(/ /gi, '');
     const userAnswerModify = userAnswer.toUpperCase().replace(/ /gi, '');
-    if (userAnswerModify === answer) {
+    if (props.isRank) {
+      if (userAnswerModify === answer) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
+    } else if (userAnswerModify === answer) {
       popCorrectModal();
       setScore(score + 1);
       setUserAnswer('');

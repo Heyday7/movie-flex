@@ -3,21 +3,6 @@ import { API_KEY, ISO_KOREA } from '../_constants';
 
 const API_KEY_1 = 'b0ff20ac5d8954e06fe0687ef0879e37';
 
-const Params1 = {
-  key: API_KEY_1,
-  curPage: 1,
-  itemPerPage: 20
-};
-
-const Params2 = {
-  key: API_KEY_1
-};
-
-const Params1Box = {
-  key: API_KEY_1,
-  itemPerPage: 20,
-};
-
 const Params = {
   api_key: API_KEY,
   language: ISO_KOREA,
@@ -33,13 +18,41 @@ const DetailParams = {
   append_to_response: 'videos',
 };
 
+const Params1 = {
+  key: API_KEY_1,
+  curPage: 1,
+  itemPerPage: 20
+};
+
+const Params2 = {
+  key: API_KEY_1
+};
+
+const Params1Box = {
+  key: API_KEY_1,
+  itemPerPage: 20,
+};
+
 const api = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
 });
 
 const api1 = axios.create({
-  baseURL: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/'
+  baseURL: 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/'
 });
+
+// response 인터셉터
+// axios.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const { config, response: { status } } = error;
+//     const originalRequest = config;
+//     if (status >= 400) {
+//       return sleepRequest(1000, originalRequest);
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export const movieApi = {
   nowPlaying: (page) => api.get('movie/now_playing', { params: { ...Params, page } }),

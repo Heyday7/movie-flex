@@ -33,10 +33,40 @@ export const recordScore = (score) => {
   });
 };
 
-export const getScore = () => {
-  db.collection('scores').get().then((querySnapshot) => {
+class Data {
+  constructor(user, score, email) {
+    this.user = user;
+    this.score = score;
+    this.email = email;
+  }
+}
+
+const dataConverter = {
+  toFirestore(data) {
+    return {
+      user: data.user,
+      score: data.score,
+      email: data.email
+    };
+  },
+  fromFirestore(snapshot, options) {
+    const data = snapshot.data(options);
+    return new Data(data.user, data.score, data.email);
+  }
+};
+
+export const getScore = async () => {
+  const rankingData = [];
+  await db.collection('scores').withConverter(dataConverter).get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
+      const data = doc.data();
+      rankingData.push(data);
     });
   });
+  rankingData.sort((a, b) => {
+    if (a.score - b.score > 0) return -1;
+    if (a.score - b.score < 0) return 1;
+    return 0;
+  });
+  return rankingData;
 };
