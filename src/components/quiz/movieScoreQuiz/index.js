@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './index.css';
+import './movieScoreQuiz.css';
 import { movieApi } from '../../../api/movieApi';
 import HoonsModal from '../../common/HoonsModal';
 
@@ -70,14 +70,19 @@ function MovieScoreQuiz() {
         {isCorrect ? <HoonsModal isCorrect={isCorrect} showModal={showModal} setshowModal={setShowModal} title="정답입니다!" /> : <HoonsModal showModal={showModal} setshowModal={setShowModal} title="오답입니다!" />}
       </>
       <div>
-        <div className="question-title">2. 영화 관객 수 비교</div>
-        <div className="question-content">다음 두 영화 중 평점이 더 높은 영화를 골라보세요. (The Movie Database 기준)</div>
+        <div className="title">
+          <div className="question-box">
+            <div className="question-title">2. 영화 관객 수 비교</div>
+            <div className="question-content">다음 두 영화 중 평점이 더 높은 영화를 골라보세요.</div>
+            <div className="question-content-refer">(The Movie Database 기준)</div>
+          </div>
+          <div className="current-score">현재 점수 : { score } 점</div>
+        </div>
         <div className="main-content">
           <img onClick={choiceLeft} src={leftMovie} alt="" className="left-movie movie-box" />
           <div className="versus">vs.</div>
           <img onClick={choiceRight} src={rightMovie} alt="" className="right-movie movie-box" />
         </div>
-        <div className="current-score">현재 점수 : { score } 점</div>
       </div>
     </>
   );
