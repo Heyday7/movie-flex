@@ -3,7 +3,7 @@ import { movieApi } from '../../../api/movieApi';
 import './directorQuiz.css';
 import Modal from '../../common/Modal';
 
-function DirectorQuiz() {
+function DirectorQuiz(props) {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들 (임의의 영화 + 감독이 만든 영화 셔플)
   const [dirMovies, setDirMovies] = useState(null); // 감독이 만든 영화들 (3개 이하로 세팅)
   const [director, setDirector] = useState(null); // 감독
@@ -125,14 +125,22 @@ function DirectorQuiz() {
     console.log(selectedMovie);
   };
   const onClickCertifyAnswer = (selectMovies) => {
-    console.log(`dirMovies${dirMovies}`);
-    console.log(`selectMovies${selectMovies}`);
-    if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
-      setSelectedMovie([]);
-      setScore(score + 1);
-      setShowModal(true);
+    if (props.isRank) {
+      if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
+        props.quizCorrect();
+      } else {
+        props.quizWrong();
+      }
     } else {
-      setShowModalFail(true);
+      console.log(`dirMovies${dirMovies}`);
+      console.log(`selectMovies${selectMovies}`);
+      if (JSON.stringify(selectMovies.sort()) === JSON.stringify(dirMovies.sort())) {
+        setSelectedMovie([]);
+        setScore(score + 1);
+        setShowModal(true);
+      } else {
+        setShowModalFail(true);
+      }
     }
   };
   return (

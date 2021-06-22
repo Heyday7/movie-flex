@@ -5,7 +5,7 @@ import arrow from '../../../style/asset/arrow.png';
 import './movieYearQuiz.css';
 import Modal from '../../common/Modal';
 
-function MovieYearQuiz() {
+function MovieYearQuiz(props) {
   const [firstMovie, setFirstMovie] = useState(null);
   const [secondMovie, setSecondMovie] = useState(null);
   const [thirdMovie, setThirdMovie] = useState(null);
@@ -91,6 +91,9 @@ function MovieYearQuiz() {
     for (let i = 0; i < 5; i += 1) {
       const answerArrayIndex = answerArray.map((answer) => parseInt(answer, 10) - 1);
       if (randomMovies.flat()[answerArrayIndex[i]]?.title !== sortedMovies.flat()[i]?.title) {
+        if (props.isRank) {
+          props.quizWrong();
+        }
         setShowModalFail(true);
         setFirstAnswer('');
         setSecondAnswer('');
@@ -100,8 +103,11 @@ function MovieYearQuiz() {
         break;
       } else {
         count += 1;
-          }
+      }
       if (count === 5) {
+        if (props.isRank) {
+          props.quizCorrect();
+        }
         setScore(score + 1);
         setShowModal(true);
         }
