@@ -66,6 +66,16 @@
     background-color: #dadada;
 }
 
+.score {
+    float: right;
+    margin-right: 10%;
+    font-family: BBTreeGo_R;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+}
+
 .quiz6 {
     width: 45%;
     height: 2%;

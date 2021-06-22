@@ -19,10 +19,9 @@ function MovieYearQuiz(props) {
   const [randomMovies, setRandomMovies] = useState(null);
   const [sortedMovies, setSortedMovies] = useState(null);
   const [score, setScore] = useState(0);
-  // modal state: true일 때 modal 출력
   const [showModal, setShowModal] = useState(false);
   const [showModalFail, setShowModalFail] = useState(false);
-  /* 1부터 20까지의 랜덤한 자연수 중 중복 없이 5개를 뽑아서 배열에 넣는다. */
+  /* 랜덤한 자연수를 중복 없이 5개 뽑아서 배열에 넣는다. */
   const randomNumbers = [];
 
   for (let i = 0; i < 5; i += 1) {
@@ -41,34 +40,34 @@ function MovieYearQuiz(props) {
   const fifthMovieIndex = randomNumbers[4];
   const makeRandomNumber = (n) => (Math.floor(Math.random(0) * (n - 1) + 1));
 
-  useEffect(() => {
-    /* 영화 데이터를 불러온다. */
-    console.log(randomNumbers);
-    const getData = async () => {
-      const { data } = await movieApi.popular(makeRandomNumber(5));
-      setFirstMovie(`https://image.tmdb.org/t/p/original${data.results[firstMovieIndex]?.poster_path}`);
-      setSecondMovie(`https://image.tmdb.org/t/p/original${data.results[secondMovieIndex]?.poster_path}`);
-      setThirdMovie(`https://image.tmdb.org/t/p/original${data.results[thirdMovieIndex]?.poster_path}`);
-      setFourthMovie(`https://image.tmdb.org/t/p/original${data.results[fourthMovieIndex]?.poster_path}`);
-      setFifthMovie(`https://image.tmdb.org/t/p/original${data.results[fifthMovieIndex]?.poster_path}`);
+  /* 영화 데이터를 불러온다. */
+  const getData = async () => {
+    const { data } = await movieApi.popular(makeRandomNumber(5));
+    setFirstMovie(`https://image.tmdb.org/t/p/original${data.results[firstMovieIndex]?.poster_path}`);
+    setSecondMovie(`https://image.tmdb.org/t/p/original${data.results[secondMovieIndex]?.poster_path}`);
+    setThirdMovie(`https://image.tmdb.org/t/p/original${data.results[thirdMovieIndex]?.poster_path}`);
+    setFourthMovie(`https://image.tmdb.org/t/p/original${data.results[fourthMovieIndex]?.poster_path}`);
+    setFifthMovie(`https://image.tmdb.org/t/p/original${data.results[fifthMovieIndex]?.poster_path}`);
 
-      const randomMoviesList = [];
-      /* 랜덤하게 뽑은 다섯 영화를 배열에 넣는다. */
-      randomMoviesList.push(randomNumbers.slice(0, 5).map((number) => data.results[number]));
-      console.log(randomMoviesList);
-      setRandomMovies(randomMoviesList);
+    const randomMoviesList = [];
+    /* 랜덤하게 뽑은 다섯 영화를 배열에 넣는다. */
+    randomMoviesList.push(randomNumbers.slice(0, 5).map((number) => data.results[number]));
+    // console.log(randomMoviesList);
+    setRandomMovies(randomMoviesList);
 
-      /* 다섯 영화의 날짜를 비교해서 오름차순으로 정렬하여 새로운 배열에 넣는다. */
-      const dateAscending = (a, b) => {
-        const dateA = new Date(a.release_date).getTime();
-        const dateB = new Date(b.release_date).getTime();
-        return dateA > dateB ? 1 : -1;
-      };
-      const sortedMoviesList = randomMoviesList.flat().sort(dateAscending);
-      setSortedMovies(sortedMoviesList);
-      console.log(sortedMoviesList);
+    /* 다섯 영화의 날짜를 비교해서 오름차순으로 정렬하여 새로운 배열에 넣는다. */
+    const dateAscending = (a, b) => {
+      const dateA = new Date(a.release_date).getTime();
+      const dateB = new Date(b.release_date).getTime();
+      return dateA > dateB ? 1 : -1;
     };
-    getData();
+    const sortedMoviesList = randomMoviesList.flat().sort(dateAscending);
+    setSortedMovies(sortedMoviesList);
+    // console.log(sortedMoviesList);
+  };
+
+    useEffect(() => {
+      getData();
   }, [score]);
 
   /* textfield의 각 숫자를 받아와서 배열에 넣는다. */
@@ -82,11 +81,11 @@ function MovieYearQuiz(props) {
 
   /* 첫 번째부터 랜덤 배열의 답으로 입력한 인덱스 영화와 오름차순 배열의 앞에서부터 영화가 일치하는지 확인한다. */
   const checkAnswer = (e) => {
-    console.log(sortedMovies.flat()[0]?.title);
-    console.log(answerArray);
-    console.log(answerArray[0]);
-    console.log(randomMovies.flat()[answerArray[0]]?.title);
-    console.log(answerArray.map((answer) => parseInt(answer, 10) - 1));
+    // console.log(sortedMovies.flat()[0]?.title);
+    // console.log(answerArray);
+    // console.log(answerArray[0]);
+    // console.log(randomMovies.flat()[answerArray[0]]?.title);
+    // console.log(answerArray.map((answer) => parseInt(answer, 10) - 1));
     let count = 0;
     for (let i = 0; i < 5; i += 1) {
       const answerArrayIndex = answerArray.map((answer) => parseInt(answer, 10) - 1);
@@ -113,6 +112,7 @@ function MovieYearQuiz(props) {
         }
       console.log(count);
       }
+    getData();
     };
 
     return (
@@ -123,18 +123,19 @@ function MovieYearQuiz(props) {
           setshowModal={setShowModal}
           confirmFunction={() => setShowModal(false)}
           title="정답입니다!"
-          contents={`현재까지 맞힌 개수: ${score}개`}
+          contents=""
         />
         <Modal
           showModal={showModalFail}
           setshowModal={setShowModalFail}
           confirmFunction={() => setShowModalFail(false)}
           title="틀렸습니다!"
-          contents={`현재까지 맞힌 개수: ${score}개`}
+          contents=""
         />
 
         <div>
           <div className="quiz6">6. 영화 개봉 순서 맞추기</div>
+          <span className="score">맞은 개수: {score}</span>
           <div className="question6">다음 영화들을 개봉한 순서대로 나열해보세요.</div>
           <div className="image_box">
             <div className="posters">
@@ -232,6 +233,6 @@ function MovieYearQuiz(props) {
         </div>
       </div>
     );
-}
+  }
 
 export default MovieYearQuiz;
