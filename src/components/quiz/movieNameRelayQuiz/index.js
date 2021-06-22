@@ -81,7 +81,7 @@ function MovieNameRelayQuiz(props) {
             <div className="question-title">3. 영화 이어말하기</div>
             <div className="question-content">이어지는 영화 제목을 맞춰보세요.</div>
           </div>
-          <div className="current-score">현재 점수 : { score } 점</div>
+          { props.isRank ? <div> </div> : <div className="current-score">현재 점수 : { score } 점</div> }
         </div>
         <div className="question-box1">
           <div className="quiz-content-hint">{ titleHint }</div>

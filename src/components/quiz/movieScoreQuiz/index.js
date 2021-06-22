@@ -88,7 +88,7 @@ function MovieScoreQuiz(props) {
             <div className="question-content">다음 두 영화 중 평점이 더 높은 영화를 골라보세요.</div>
             <div className="question-content-refer">(The Movie Database 기준)</div>
           </div>
-          <div className="current-score">현재 점수 : { score } 점</div>
+          { props.isRank ? <div> </div> : <div className="current-score">현재 점수 : { score } 점</div> }
         </div>
         <div className="main-content">
           <img onClick={choiceLeft} src={leftMovie} alt="" className="left-movie movie-box" />
