@@ -41,6 +41,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 0,
     'react/no-array-index-key': 0,
     'eol-last': 0,
-    'no-constant-condition': 0
+    'no-constant-condition': 0,
+    'react/destructuring-assignment': 0
   },
 };
