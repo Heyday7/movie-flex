@@ -1,0 +1,24 @@
+.RankTable {
+    width: 800px !important;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.remark {
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+.rank_1 {
+    background-color: greenyellow;
+}
+
+.retry {
+    border: 2px solid gray;
+    border-radius: 30px;
+    text-align: center;
+    align-self: center;
+    display:inline-block;
+    padding: 20px;
+}
