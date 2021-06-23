@@ -24,7 +24,7 @@ const S = {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 300px; // height는 내용에 맞춰 알아서 늘어나도록. 아이폰 5가 320px이 가로
+      width: 350px; // height는 내용에 맞춰 알아서 늘어나도록. 아이폰 5가 320px이 가로
       /* ${(props) => props.theme.deviceSizes.desktop} {
         width: 30%;
       } */
@@ -70,13 +70,18 @@ const S = {
     }
   `,
 };
+const regameStyle = {
+  color: 'blue',
+  fontWeight: '600',
+  cursor: 'pointer'
+};
 
 const refreshPage = () => {
   window.location.reload();
 };
 
 function Modal({
-  isCorrect, showModal, setshowModal, title = 'title'
+  isCorrect, showModal, setshowModal, title = 'title', answer
 }) {
   return (
     <>
@@ -86,7 +91,10 @@ function Modal({
             <div className="modal-title">{title}</div>
             {isCorrect || (
               <>
-                <div className="regame" style={{ color: 'blue', fontWeight: '600' }} onClick={refreshPage}>다시하기</div>
+                {answer && (
+                  <div>정답 : {answer}</div>
+                )}
+                <div className="regame" style={regameStyle} onClick={refreshPage}>다시하기</div>
                 <Link className="link-to-main" to="/">메인화면으로 돌아가기</Link>
               </>
             )}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { movieApi } from '../../../api/movieApi';
 import './actorQuiz.css';
 import Modal from '../../common/Modal';
+import HeaderBar from '../../common/HeaderBar';
 
 function ActorQuiz(props) {
   const [movies, setMovies] = useState(null); // 보기에 나오는 영화들(임의의 영화 + 배우 출연 영화 1개)
@@ -9,6 +10,7 @@ function ActorQuiz(props) {
   const [actor, setActor] = useState(null); // 배우 이름
   const [selectedMovie, setSelectedMovie] = useState(null); // 선택된 영화 이름
   const [score, setScore] = useState(0); // 맞힌 개수
+  const [failScore, setFailScore] = useState(0); // 틀린 개수
   const moviesNameList = []; // 보기에 들어갈 임의의 영화를 받는 리스트
   const moviesCdList = []; // 박스오피스 순위권 영화 코드를 받는 리스트
   // modal state: true일 때 modal 출력
@@ -54,16 +56,16 @@ function ActorQuiz(props) {
           moviesNameList.push(movie.movieNm);
         });
         setMovies(shuffleArray(moviesNameList));
-        console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
+        // console.log(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
         setActorMovie(res.data.boxOfficeResult.dailyBoxOfficeList[0].movieNm);
         return res.data.boxOfficeResult.dailyBoxOfficeList[0].movieCd;
       })
       .then((numOneMovieCd) => {
-        console.log(numOneMovieCd);
+        // console.log(numOneMovieCd);
         const getMovieDetail = async (numOneMovieCd) => {
           const { data } = await movieApi.movieDetailByCd(numOneMovieCd);
-          console.log('data!!');
-          console.log(data);
+          // console.log('data!!');
+          // console.log(data);
           // if (data.movieListResult.movieList[0].directors[0] !== undefined) {
           //   return data.movieListResult.movieList[0].directors[0].peopleNm;
           // }
@@ -72,44 +74,46 @@ function ActorQuiz(props) {
         getMovieDetail(numOneMovieCd)
           .then((actorName) => {
             setActor(actorName);
-            console.log(`actor Name:${actorName}`);
+            // console.log(`actor Name:${actorName}`);
           });
       });
-  }, [score]);
+  }, [score, failScore]);
   const onChangeAnswerBox = (movie) => {
     if (selectedMovie === movie) {
       setSelectedMovie(null);
     } else {
       setSelectedMovie(movie);
     }
-    console.log(`selected!${selectedMovie}`);
+    // console.log(`selected!${selectedMovie}`);
   };
   const onClickCertifyAnswer = (selectMovie) => {
+    // console.log(`actorMovietype${typeof (actorMovie)}`);
+    // console.log(`selectMovietype${typeof (selectMovie)}`);
+    // console.log(`actorMovie${actorMovie}`);
+    // console.log(`selectMovie${selectMovie}`);
     if (props.isRank) {
       if (selectMovie === actorMovie) {
         props.quizCorrect();
       } else {
         props.quizWrong();
       }
-    } else {
-      console.log(`actorMovietype${typeof (actorMovie)}`);
-      console.log(`selectMovietype${typeof (selectMovie)}`);
-      console.log(`actorMovie${actorMovie}`);
-      console.log(`selectMovie${selectMovie}`);
-      if (selectMovie === actorMovie) {
+    } else if (selectMovie === actorMovie) {
         setSelectedMovie([]);
         setScore(score + 1);
         setShowModal(true);
       } else {
+        setSelectedMovie([]);
         setShowModalFail(true);
       }
-    }
+  };
+  const onConfirmFail = () => {
+    setFailScore(failScore + 1);
+    setShowModalFail(false);
   };
   return (
     <div>
-      <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답!" contents={`현재까지 맞힌 개수: ${score}`} />
-      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => setShowModalFail(false)} title="틀렸습니다!" contents={`현재까지 맞힌 개수: ${score}`} />
-
+      <Modal showModal={showModal} setshowModal={setShowModal} confirmFunction={() => setShowModal(false)} title="정답!" contents={`현재까지 맞힌 개수: ${score}개`} />
+      <Modal showModal={showModalFail} setshowModal={setShowModalFail} confirmFunction={() => onConfirmFail()} title="틀렸습니다!" contents={`정답: ${actorMovie}`} />
       <div>
         <div className="quiz4">5. 배우가 출연한 영화 고르기</div>
         <div className="question4">다음 배우가 출연한 영화를 고르세요</div>
@@ -118,10 +122,13 @@ function ActorQuiz(props) {
         </div>
         { movies && actorMovie && (
           <div className="hint">
-            <span>
-              맞은 개수:
-              {score}
-            </span>
+            {/* eslint-disable-next-line react/destructuring-assignment */}
+            { !props.isRank && (
+              <span>
+                맞은 개수:
+                {score}
+              </span>
+            )}
             <ul className="answer_sheet">
               { movies.map((movie) => (
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events
@@ -147,5 +154,4 @@ function ActorQuiz(props) {
     </div>
   );
 }
-
 export default ActorQuiz;

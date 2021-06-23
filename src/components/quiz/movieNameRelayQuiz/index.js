@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './index.css';
+import './movieNameRelayQuiz.css';
 import { movieApi } from '../../../api/movieApi';
 import HoonsModal from '../../common/HoonsModal';
 
@@ -73,12 +73,17 @@ function MovieNameRelayQuiz(props) {
   return (
     <>
       <>
-        {isCorrect ? <HoonsModal isCorrect={isCorrect} showModal={showModal} setshowModal={setShowModal} title="정답입니다!" /> : <HoonsModal showModal={showModal} setshowModal={setShowModal} title="오답입니다!" />}
+        {isCorrect ? <HoonsModal isCorrect={isCorrect} showModal={showModal} setshowModal={setShowModal} title="정답입니다!" /> : <HoonsModal showModal={showModal} setshowModal={setShowModal} title="오답입니다!" answer={movieTitle} />}
       </>
       <div>
-        <div className="question-title">3. 영화 이어말하기</div>
-        <div className="question-content">이어지는 영화 제목을 맞춰보세요.</div>
-        <div className="question-box">
+        <div className="title">
+          <div className="question-header">
+            <div className="question-title">3. 영화 이어말하기</div>
+            <div className="question-content">이어지는 영화 제목을 맞춰보세요.</div>
+          </div>
+          { props.isRank ? <div> </div> : <div className="current-score">현재 점수 : { score } 점</div> }
+        </div>
+        <div className="question-box1">
           <div className="quiz-content-hint">{ titleHint }</div>
           <div className="quiz-content-quiz">{ '? '.repeat(answerLength) }</div>
         </div>
@@ -89,7 +94,6 @@ function MovieNameRelayQuiz(props) {
         <div onClick={(e) => checkAnswer(e)} className="answer-button">
           <div> 정답 제출 </div>
         </div>
-        <div className="current-score">현재 점수 : { score } 점</div>
       </div>
     </>
   );
