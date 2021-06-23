@@ -67,7 +67,7 @@
 }
 
 .score {
-    float: right;
+    float: left;
     margin-right: 10%;
     font-family: BBTreeGo_R;
     font-size: 18px;

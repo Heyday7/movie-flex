@@ -3,6 +3,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import firebase from 'firebase/app';
 import Modal from '../../common/Modal';
 import { recordScore, login } from '../../../firebase';
+import './rankGame.css';
+import popcorn from './popcorn.png';
+import ticket from './ticket.png';
 
 const ActorQuiz = React.lazy(() => import('../actorQuiz'));
 const DirectorQuiz = React.lazy(() => import('../directorQuiz'));
@@ -19,13 +22,19 @@ function rankGame() {
   const [showModal, setShowModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [ready, setReady] = useState(false);
+  const [lifeImage, setLifeImage] = useState([]);
+  const [scoreImage, setScoreImage] = useState([]);
 
   const getQuiz = () => Math.floor(Math.random() * 6);
 
+  let lives = [];
+  let scores = [];
   const quizCorrect = () => {
     setScore(score + 1);
     toast.success('맞췄습니다!! [Score +1]');
     setQuizNum(getQuiz());
+    // setLifeImage(lives);
+    // setScoreImage(scores);
   };
 
   const quizWrong = () => {
@@ -33,6 +42,8 @@ function rankGame() {
     console.log(`life is ${life}`);
     toast.error('틀렸습니다!! [Life -1] ㅠ.ㅠ');
     setQuizNum(getQuiz());
+    // setLifeImage(lives);
+    // setScoreImage(scores);
   };
 
   const quizzes = [
@@ -69,6 +80,34 @@ function rankGame() {
     }
   });
 
+  const makeLife = () => {
+    lives = [];
+    for (let i = 0; i < life; i += 1) {
+      lives.push(<img id="popcorn" key={life} src={popcorn} alt={popcorn} />);
+    }
+    return lives;
+  };
+
+  // useEffect(() => {
+  //   // makeLife();
+  //   setLifeImage(lives);
+  // }, [life]);
+
+  const makeScore = () => {
+    scores = [];
+    for (let i = 0; i < score; i += 1) {
+      scores.push(<img id="ticket" key={score} src={ticket} alt={ticket} />);
+      console.log(scores);
+      console.log(score);
+    }
+    return scores;
+  };
+
+  useEffect(() => {
+    // makeScore();
+    setScoreImage(scores);
+  }, [score]);
+
   return (
     <div>
       {ready
@@ -87,12 +126,16 @@ function rankGame() {
             title="Game Over!"
             contents={`최종 score : ${score} \n 이 score가 Ranking에 기록됩니다!`}
           />
-          <div className="">
-            <div className="score">
-              score : {score}
-            </div>
+          <div className="board">
             <div className="life">
-              Life : {life}
+              <img id="popcorn" key={life} src={popcorn} alt={popcorn} />
+              <div className="lifeCount">남은 목숨&nbsp;&nbsp;</div>
+              <span className="lifeCount">{ life }</span>
+            </div>
+            <div className="score">
+              <img id="ticket" key={score} src={ticket} alt={ticket} />
+              <div className="scoreCount">현재 점수&nbsp;&nbsp;</div>
+              <span className="scoreCount">{ score }</span>
             </div>
           </div>
           {quiz}

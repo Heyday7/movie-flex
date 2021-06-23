@@ -29,7 +29,6 @@
     letter-spacing: normal;
     text-align: center;
     color: #dadada;
-    z-index: 100;
 }
 
 #startButton {
@@ -50,7 +49,6 @@
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
-    z-index: 100;
 }
 
 .body {

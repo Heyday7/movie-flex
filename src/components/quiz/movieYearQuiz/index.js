@@ -135,7 +135,11 @@ function MovieYearQuiz(props) {
 
         <div>
           <div className="quiz6">6. 영화 개봉 순서 맞추기</div>
-          <span className="score">맞은 개수: {score}</span>
+          <span className="score">
+            { !props.isRank && (
+              <span>맞은 개수: { score }</span>
+             )}
+          </span>
           <div className="question6">다음 영화들을 개봉한 순서대로 나열해보세요.</div>
           <div className="image_box">
             <div className="posters">
