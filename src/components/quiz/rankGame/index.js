@@ -124,7 +124,7 @@ function rankGame() {
               setQuizNum(getQuiz());
             }}
             title="Game Over!"
-            contents={`최종 score : ${score} \n 이 score가 Ranking에 기록됩니다!`}
+            contents={`최종 score : ${score}가 Ranking에 기록됩니다!`}
           />
           <div className="board">
             <div className="life">

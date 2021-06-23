@@ -176,6 +176,7 @@ function DirectorQuiz(props) {
                     : 'defaultAnswerBox'
                 }
                   onClick={() => onChangeAnswerBox(movie)}
+                  key={movie}
                 >
                   {movie}
                 </li>

@@ -49,8 +49,10 @@ function Home({ history }) {
         <div id="subtitle">
           6가지 영화 퀴즈 풀어보고 당신의 랭킹을 확인해보세요.
         </div>
-        <div>
-          <button id="startButton" onClick={() => history.push('/rank-game')}>랭킹전 도전하기</button>
+        <div id="startButton">
+          <S.GameWrapper>
+            <S.Game className="rankGame" onClick={() => history.push('/rank-game')}>랭킹전 도전하기</S.Game>
+          </S.GameWrapper>
         </div>
         <Container className="gameWrapper">
           <S.GameWrapper>
@@ -58,7 +60,7 @@ function Home({ history }) {
               영화 초성<br />맞추기
             </S.Game>
             <S.Game className="movieScoreQuiz" onClick={() => history.push('/movie-score-quiz')}>
-              영화 관객수<br />비교하기
+              영화 평점<br />비교하기
             </S.Game>
             <S.Game className="movieNameQuiz" onClick={() => history.push('/movie-name-relay-quiz')}>
               영화<br />이어말하기

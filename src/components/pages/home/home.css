@@ -34,7 +34,7 @@
 #startButton {
     position: relative;
     width: 20.3%;
-    height: 3%;
+    height: 3% !important;
     margin: 5% 40% 5.9% 40%;
     padding: 1% 3%;
     border-radius: 10px;
@@ -49,6 +49,10 @@
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+}
+
+.rankGame {
+    padding: 10px !important;
 }
 
 .body {
