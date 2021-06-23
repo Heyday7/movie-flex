@@ -50,7 +50,7 @@ function Home({ history }) {
           6가지 영화 퀴즈 풀어보고 당신의 랭킹을 확인해보세요.
         </div>
         <div>
-          <button id="startButton" onClick={() => history.push('/rankGame')}>랭킹전 도전하기</button>
+          <button id="startButton" onClick={() => history.push('/rank-game')}>랭킹전 도전하기</button>
         </div>
         <Container className="gameWrapper">
           <S.GameWrapper>
